@@ -1,2 +1,2 @@
 # InvCraft
-A "rewrite" version of CustomCraftUltimate by GreenJajot
+* This is a "rewrite" version of CustomCraftUltimate by GreenJajot
