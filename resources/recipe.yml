@@ -1,0 +1,571 @@
+---
+custom:
+- name: "1"
+  a1:
+    id: 332
+    damage: 0
+    count: 16
+  a2:
+    id: 332
+    damage: 0
+    count: 16
+  a3:
+    id: 332
+    damage: 0
+    count: 16
+  a4:
+    id: 332
+    damage: 0
+    count: 16
+  a5:
+    id: 332
+    damage: 0
+    count: 16
+  a6:
+    id: 332
+    damage: 0
+    count: 16
+  b1:
+    id: 332
+    damage: 0
+    count: 16
+  b2:
+    id: 80
+    damage: 0
+    count: 1
+  b3:
+    id: 80
+    damage: 0
+    count: 1
+  b4:
+    id: 80
+    damage: 0
+    count: 1
+  b5:
+    id: 80
+    damage: 0
+    count: 1
+  b6:
+    id: 332
+    damage: 0
+    count: 16
+  c1:
+    id: 332
+    damage: 0
+    count: 16
+  c2:
+    id: 80
+    damage: 0
+    count: 1
+  c3:
+    id: 0
+  c4:
+    id: 0
+  c5:
+    id: 80
+    damage: 0
+    count: 1
+  c6:
+    id: 332
+    damage: 0
+    count: 16
+  d1:
+    id: 332
+    damage: 0
+    count: 16
+  d2:
+    id: 80
+    damage: 0
+    count: 1
+  d3:
+    id: 0
+  d4:
+    id: 0
+  d5:
+    id: 80
+    damage: 0
+    count: 1
+  d6:
+    id: 332
+    damage: 0
+    count: 16
+  e1:
+    id: 332
+    damage: 0
+    count: 16
+  e2:
+    id: 80
+    damage: 0
+    count: 1
+  e3:
+    id: 80
+    damage: 0
+    count: 1
+  e4:
+    id: 80
+    damage: 0
+    count: 1
+  e5:
+    id: 80
+    damage: 0
+    count: 1
+  e6:
+    id: 332
+    damage: 0
+    count: 16
+  f1:
+    id: 332
+    damage: 0
+    count: 16
+  f2:
+    id: 332
+    damage: 0
+    count: 16
+  f3:
+    id: 332
+    damage: 0
+    count: 16
+  f4:
+    id: 332
+    damage: 0
+    count: 16
+  f5:
+    id: 332
+    damage: 0
+    count: 16
+  f6:
+    id: 332
+    damage: 0
+    count: 16
+  result:
+    id: 80
+    damage: 0
+    count: 1
+    display_name: "§l§e│§r Tuyết Giáng Sinh§l§e │"
+    lore:
+    - "§b- §r Tuyết Giáng Sinh§b -\n\n§f-§e Loại:§f Item Event §f-\n§c--------------------\n§f-§d Công Dụng §f-\n§c--------------------\n§dCraft Vật Phẩm Event\n§c--------------------\n- Có độ bền §evĩnh viễn"
+    enchants:
+      17: 32767
+- name: "2"
+  a1:
+    id: 332
+    damage: 0
+    count: 16
+  a2:
+    id: 332
+    damage: 0
+    count: 16
+  a3:
+    id: 332
+    damage: 0
+    count: 16
+  a4:
+    id: 332
+    damage: 0
+    count: 16
+  a5:
+    id: 332
+    damage: 0
+    count: 16
+  a6:
+    id: 332
+    damage: 0
+    count: 16
+  b1:
+    id: 332
+    damage: 0
+    count: 16
+  b2:
+    id: 80
+    damage: 0
+    count: 1
+  b3:
+    id: 80
+    damage: 0
+    count: 1
+  b4:
+    id: 80
+    damage: 0
+    count: 1
+  b5:
+    id: 80
+    damage: 0
+    count: 1
+  b6:
+    id: 332
+    damage: 0
+    count: 16
+  c1:
+    id: 332
+    damage: 0
+    count: 16
+  c2:
+    id: 80
+    damage: 0
+    count: 1
+  c3:
+    id: 79
+    damage: 0
+    count: 10
+  c4:
+    id: 79
+    damage: 0
+    count: 10
+  c5:
+    id: 80
+    damage: 0
+    count: 1
+  c6:
+    id: 332
+    damage: 0
+    count: 16
+  d1:
+    id: 332
+    damage: 0
+    count: 16
+  d2:
+    id: 80
+    damage: 0
+    count: 1
+  d3:
+    id: 79
+    damage: 0
+    count: 10
+  d4:
+    id: 79
+    damage: 0
+    count: 10
+  d5:
+    id: 80
+    damage: 0
+    count: 1
+  d6:
+    id: 332
+    damage: 0
+    count: 16
+  e1:
+    id: 332
+    damage: 0
+    count: 16
+  e2:
+    id: 80
+    damage: 0
+    count: 1
+  e3:
+    id: 80
+    damage: 0
+    count: 1
+  e4:
+    id: 80
+    damage: 0
+    count: 1
+  e5:
+    id: 80
+    damage: 0
+    count: 1
+  e6:
+    id: 332
+    damage: 0
+    count: 16
+  f1:
+    id: 332
+    damage: 0
+    count: 16
+  f2:
+    id: 332
+    damage: 0
+    count: 16
+  f3:
+    id: 332
+    damage: 0
+    count: 16
+  f4:
+    id: 332
+    damage: 0
+    count: 16
+  f5:
+    id: 332
+    damage: 0
+    count: 16
+  f6:
+    id: 332
+    damage: 0
+    count: 16
+  result:
+    id: 80
+    damage: 0
+    count: 1
+    display_name: "§l§e│§r Băng Giáng Sinh§l§e │"
+    lore:
+    - "§b- §r Băng Giáng Sinh§b -\n\n§f-§e Loại:§f Item Event §f-\n§c--------------------\n§f-§d Công Dụng §f-\n§c--------------------\n§dCraft Vật Phẩm Event\n§c--------------------\n- Có độ bền §evĩnh viễn"
+    enchants:
+      17: 32767
+- name: "3"
+  a1:
+    id: 338
+    damage: 0
+    count: 32
+  a2:
+    id: 338
+    damage: 0
+    count: 32
+  a3:
+    id: 338
+    damage: 0
+    count: 32
+  a4:
+    id: 338
+    damage: 0
+    count: 32
+  a5:
+    id: 338
+    damage: 0
+    count: 32
+  a6:
+    id: 338
+    damage: 0
+    count: 32
+  b1:
+    id: 338
+    damage: 0
+    count: 32
+  b2:
+    id: 353
+    damage: 0
+    count: 1
+  b3:
+    id: 353
+    damage: 0
+    count: 1
+  b4:
+    id: 353
+    damage: 0
+    count: 1
+  b5:
+    id: 353
+    damage: 0
+    count: 1
+  b6:
+    id: 338
+    damage: 0
+    count: 32
+  c1:
+    id: 338
+    damage: 0
+    count: 32
+  c2:
+    id: 353
+    damage: 0
+    count: 1
+  c3:
+    id: 0
+  c4:
+    id: 0
+  c5:
+    id: 353
+    damage: 0
+    count: 1
+  c6:
+    id: 338
+    damage: 0
+    count: 32
+  d1:
+    id: 338
+    damage: 0
+    count: 32
+  d2:
+    id: 353
+    damage: 0
+    count: 1
+  d3:
+    id: 0
+  d4:
+    id: 0
+  d5:
+    id: 353
+    damage: 0
+    count: 1
+  d6:
+    id: 338
+    damage: 0
+    count: 32
+  e1:
+    id: 338
+    damage: 0
+    count: 32
+  e2:
+    id: 353
+    damage: 0
+    count: 1
+  e3:
+    id: 353
+    damage: 0
+    count: 1
+  e4:
+    id: 353
+    damage: 0
+    count: 1
+  e5:
+    id: 353
+    damage: 0
+    count: 1
+  e6:
+    id: 338
+    damage: 0
+    count: 32
+  f1:
+    id: 338
+    damage: 0
+    count: 32
+  f2:
+    id: 338
+    damage: 0
+    count: 32
+  f3:
+    id: 338
+    damage: 0
+    count: 32
+  f4:
+    id: 338
+    damage: 0
+    count: 32
+  f5:
+    id: 338
+    damage: 0
+    count: 32
+  f6:
+    id: 338
+    damage: 0
+    count: 32
+  result:
+    id: 260
+    damage: 0
+    count: 1
+    display_name: "§l§e│§r Kẹo Giáng Sinh§l§e │"
+    lore:
+    - "§b- §r Kẹo Giáng Sinh§b -\n\n§f-§e Loại:§f Item Event §f-\n§c--------------------\n§f-§d Công Dụng §f-\n§c--------------------\n§dCraft Vật Phẩm Event\n§c--------------------\n- Có độ bền §evĩnh viễn"
+    enchants:
+      17: 32767
+- name: "4"
+  a1:
+    id: 54
+    damage: 0
+    count: 10
+  a2:
+    id: 54
+    damage: 0
+    count: 10
+  a3:
+    id: 54
+    damage: 0
+    count: 10
+  a4:
+    id: 54
+    damage: 0
+    count: 10
+  a5:
+    id: 54
+    damage: 0
+    count: 10
+  a6:
+    id: 54
+    damage: 0
+    count: 10
+  b1:
+    id: 54
+    damage: 0
+    count: 10
+  b2:
+    id: 0
+  b3:
+    id: 0
+  b4:
+    id: 0
+  b5:
+    id: 0
+  b6:
+    id: 54
+    damage: 0
+    count: 10
+  c1:
+    id: 54
+    damage: 0
+    count: 10
+  c2:
+    id: 0
+  c3:
+    id: 0
+  c4:
+    id: 0
+  c5:
+    id: 0
+  c6:
+    id: 54
+    damage: 0
+    count: 10
+  d1:
+    id: 54
+    damage: 0
+    count: 10
+  d2:
+    id: 0
+  d3:
+    id: 0
+  d4:
+    id: 0
+  d5:
+    id: 0
+  d6:
+    id: 54
+    damage: 0
+    count: 10
+  e1:
+    id: 54
+    damage: 0
+    count: 10
+  e2:
+    id: 0
+  e3:
+    id: 0
+  e4:
+    id: 0
+  e5:
+    id: 0
+  e6:
+    id: 54
+    damage: 0
+    count: 10
+  f1:
+    id: 54
+    damage: 0
+    count: 10
+  f2:
+    id: 54
+    damage: 0
+    count: 10
+  f3:
+    id: 54
+    damage: 0
+    count: 10
+  f4:
+    id: 54
+    damage: 0
+    count: 10
+  f5:
+    id: 54
+    damage: 0
+    count: 10
+  f6:
+    id: 54
+    damage: 0
+    count: 10
+  result:
+    id: 54
+    damage: 0
+    count: 1
+    display_name: "§l§e│§r Hộp Quà Giáng Sinh§l§e │"
+    lore:
+    - "§b- §r Hộp Quà Giáng Sinh§b -\n\n§f-§e Loại:§f Item Event §f-\n§c--------------------\n§f-§d Công Dụng §f-\n§c--------------------\n§dCraft Vật Phẩm Event\n§c--------------------\n- Có độ bền §evĩnh viễn\n- Hộp quà có thể mở vào ngày 28/12"
+    enchants:
+      17: 32767
+...

@@ -1,0 +1,25 @@
+name: CustomCraftUltimate
+main: GreenJajot\CustomCraftUltimate\Main
+version: 1.0
+api: 3.0.0
+author: GreenJajot
+commands:
+ craftultimate:
+  description: "Mở Bàn Chế Tạo Tối Thượng"
+  usage: "/craftultimate"
+ addrecipe:
+  description: "Thêm Bàn Chế Tạo Tối Thượng"
+  usage: "/addrecipe"
+  permission: customcraft.edit
+ delrecipe:
+  description: "Xóa Bàn Chế Tạo Tối Thượng"
+  usage: "/delrecipe"
+  permission: customcraft.edit
+ listrecipeultimate:
+  description: "Xem Công Thức Chế Tạo Tối Thượng"
+  usage: "/listrecipeultimate"
+permissions:
+  customcraft.edit:
+    default: false
+  customcraft.unlimited:
+    default: op
