@@ -91,7 +91,7 @@ class Recipe
      */
     public function setRecipeData(array $data)
     {
-        $this->recipe_data = $data
+        $this->recipe_data = $data;
     }
 
     /**
