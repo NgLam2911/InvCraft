@@ -4,3 +4,9 @@ api: 3.12.0
 version: 0.1-ngl_pub
 author: NgLamVN
 description: This plugin is a "update and rewrite" version of CustomCraftUltimate by GreenJajot
+
+permissions:
+  ic.command:
+    default: true
+  ic.admin:
+    default: op

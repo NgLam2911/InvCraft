@@ -33,6 +33,7 @@ class Loader extends PluginBase
     {
         $this->saveRecipes();
         $this->getProvider()->save();
+        var_dump($this->recipes);
     }
 
     public function getProvider(): Provider
