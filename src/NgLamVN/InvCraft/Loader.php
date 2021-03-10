@@ -3,6 +3,7 @@
 namespace NgLamVN\InvCraft;
 
 use muqsit\invmenu\InvMenuHandler;
+use NgLamVN\InvCraft\command\InvCraftCommand;
 use pocketmine\item\Item;
 use pocketmine\nbt\BigEndianNBTStream;
 use pocketmine\nbt\tag\CompoundTag;
@@ -24,6 +25,8 @@ class Loader extends PluginBase
 
         $this->provider = new Provider($this->getDataFolder());
         $this->provider->open();
+
+        $this->getServer()->getCommandMap()->register("invcraft", new InvCraftCommand($this));
     }
 
     public function onDisable()
