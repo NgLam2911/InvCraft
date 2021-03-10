@@ -4,11 +4,17 @@ namespace NgLamVN\InvCraft;
 
 use muqsit\invmenu\InvMenuHandler;
 use pocketmine\item\Item;
+use pocketmine\nbt\BigEndianNBTStream;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\plugin\PluginBase;
 
 class Loader extends PluginBase
 {
+    /** @var Provider $provider */
+    public $provider;
+    /** @var Recipe $recipes */
+    public $recipes = [];
+
     public function onEnable()
     {
         if(!InvMenuHandler::isRegistered())
@@ -16,48 +22,78 @@ class Loader extends PluginBase
             InvMenuHandler::register($this);
         }
 
-
+        $this->provider = new Provider($this->getDataFolder());
+        $this->provider->open();
     }
 
     public function onDisable()
     {
+        $this->saveRecipes();
+        $this->getProvider()->save();
     }
 
-    /**
-     * @param array $data
-     * @return Item[]
-     */
-    public function makeItemList (array $data): array
+    public function getProvider(): Provider
     {
-        foreach (array_keys($data) as $id)
+        return $this->provider;
+    }
+
+    public function loadRecipes()
+    {
+        $data = $this->getProvider()->getRecipesData();
+        foreach (array_keys($data) as $recipe_name)
         {
-            //TODO: Make Items Function
+            $recipe_data = [];
+            foreach ($data[$recipe_name]["recipe"] as $item)
+            {
+                $nbt = BigEndianNBTStream::fromArray($item);
+                $item = Item::nbtDeserialize($nbt);
+                array_push($recipe_data, $item);
+            }
+            $result = Item::nbtDeserialize(BigEndianNBTStream::fromArray($data[$recipe_name]["result"]));
+
+            $recipe = Recipe::makeRecipe($recipe_name, $recipe_data, $result);
+            $this->setRecipe($recipe);
         }
     }
 
-    public function ArrayToCompoundTag(array $array): CompoundTag
+    public function saveRecipes()
     {
-        $nbt = new CompoundTag();
-    }
-
-    public function CompoundTagToArray(CompoundTag $nbt): array
-    {
-        foreach ($nbt as $tag)
+        foreach ($this->getRecipes() as $recipe)
         {
-
+            $data = [];
+            $data["result"] = BigEndianNBTStream::toArray($recipe->getResultItem()->nbtSerialize());
+            $recipe_data = [];
+            foreach ($recipe->getRecipeData() as $item)
+            {
+                $itemdata = BigEndianNBTStream::toArray($item->nbtSerialize());
+                array_push($recipe_data, $itemdata);
+            }
+            $data["recipe"] = $recipe_data;
+            $this->getProvider()->setRecipeData($recipe->getRecipeName(), $data);
         }
     }
 
     /**
-     * @param string $id
-     * @param CompoundTag $nbt
-     * @return Item
+     * @param string $name
+     * @return Recipe
      */
-    public function makeItem(string $id, CompoundTag $nbt): Item
+    public function getRecipe(string $name): ?Recipe
     {
-        $info = explode($id, ":");
-        $item = Item::get($info[0], $info[1], $info[2]);
-        $item->setNamedTag($nbt);
-        return $item;
+        if (isset($this->recipes[$name])) return $this->recipes[$name];
+        return null;
     }
+
+    /**
+     * @return Recipe[]
+     */
+    public function getRecipes(): array
+    {
+        return $this->recipes;
+    }
+
+    public function setRecipe(Recipe $recipe)
+    {
+        $this->recipes[$recipe->getRecipeName()] = $recipe;
+    }
+
 }
