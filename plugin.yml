@@ -1,5 +1,5 @@
 name: InvCraft
-main: NgLamVN/InvCraft/Loader
+main: NgLamVN\InvCraft\Loader
 api: 3.12.0
 version: 0.1-ngl_pub
 author: NgLamVN

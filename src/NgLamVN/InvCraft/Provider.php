@@ -31,7 +31,7 @@ class Provider
     public function save()
     {
         $this->config->setAll($this->recipes);
-        $this->save();
+        $this->config->save();
     }
 
     public function getRecipesData(): array
