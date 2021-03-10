@@ -6,3 +6,5 @@
 * Install InvMenu virion and DevTools (Make sure everything is lastest version) into your server. 
 * Clone this repository into your plugin folder or download zip and extract it to plugin folder.
 * Run server and enjoy...
+# WARNING
+* This plugin is incomplete, dont make issue like "IT DOESNT WORK".
