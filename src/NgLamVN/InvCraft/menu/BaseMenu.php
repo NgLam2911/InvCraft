@@ -2,20 +2,24 @@
 
 namespace NgLamVN\InvCraft\menu;
 
+use pocketmine\Player;
+
 abstract class BaseMenu
 {
-    public function __construct()
+    public $menu;
+
+    public function __construct(Player $player)
     {
-        //TODO: Construct;
+        $this->menu($player);
     }
 
-    public function menu()
+    public function menu(Player $player)
     {
-        //TODO: Menu
+
     }
 
     public function MenuListener()
     {
-        //TODO: MenuListener
+
     }
 }
