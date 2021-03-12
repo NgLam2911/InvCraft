@@ -11,7 +11,7 @@ use pocketmine\Player;
 
 class AddRecipeMenu extends BaseMenu
 {
-    const const PROTECTED_SLOT = [6, 7, 8, 15, 16, 17, 24, 25, 26, 33, 35, 42, 43, 44, 51, 52];
+    const PROTECTED_SLOT = [6, 7, 8, 15, 16, 17, 24, 25, 26, 33, 35, 42, 43, 44, 51, 52];
 
     public $recipe_name;
 
@@ -23,7 +23,7 @@ class AddRecipeMenu extends BaseMenu
 
     public function menu(Player $player)
     {
-        $this->menu = new InvMenu(InvMenu::TYPE_DOUBLE_CHEST);
+        $this->menu = InvMenu::create(InvMenu::TYPE_DOUBLE_CHEST);
         $this->menu->setName("Add Recipe");
         $this->menu->setListener(\Closure::fromCallable([$this, "MenuListener"]));
         $inv = $this->menu->getInventory();
@@ -38,21 +38,23 @@ class AddRecipeMenu extends BaseMenu
         }
         $save = Item::get(Item::SLIMEBALL)->setCustomName("SAVE");
         $inv->setItem(53, $save);
+
+        $this->menu->send($player);
     }
 
     public function MenuListener(InvMenuTransaction $transaction)
     {
         if (in_array($transaction->getAction()->getSlot(), self::PROTECTED_SLOT))
         {
-            $transaction->discard();
-            return;
+            return $transaction->discard();
         }
         if ($transaction->getAction()->getSlot() === 53)
         {
             $this->save();
-            $transaction->discard();
             $transaction->getPlayer()->removeAllWindows();
+            return $transaction->discard();
         }
+        return $transaction->continue();
     }
 
     public function save()
@@ -69,7 +71,7 @@ class AddRecipeMenu extends BaseMenu
         for ($i = 0; $i <= 53; $i++)
         {
             if (!in_array($i, self::PROTECTED_SLOT))
-                if ($i !== 34)
+                if (($i !== 34) and ($i !== 53))
                 {
                     $item = $this->menu->getInventory()->getItem($i);
                     array_push($recipe_data, $item);

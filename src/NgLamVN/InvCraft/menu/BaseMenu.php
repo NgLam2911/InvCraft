@@ -27,8 +27,4 @@ abstract class BaseMenu
     public function menu(Player $player)
     {
     }
-
-    public function MenuListener()
-    {
-    }
 }

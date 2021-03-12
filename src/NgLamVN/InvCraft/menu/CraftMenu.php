@@ -15,7 +15,7 @@ class CraftMenu extends BaseMenu
 
     public function menu(Player $player)
     {
-        $this->menu = new InvMenu(InvMenu::TYPE_DOUBLE_CHEST);
+        $this->menu = InvMenu::create(InvMenu::TYPE_DOUBLE_CHEST);
         $this->menu->setName("BigCraftingTable");
         $this->menu->setListener(\Closure::fromCallable([$this, "MenuListener"]));
         $inv = $this->menu->getInventory();
@@ -28,31 +28,36 @@ class CraftMenu extends BaseMenu
             }
         }
 
+        $this->menu->send($player);
     }
 
     public function MenuListener(InvMenuTransaction $transaction)
     {
         if (in_array($transaction->getAction()->getSlot(), self::PROTECTED_SLOT))
         {
-            $transaction->discard();
-            return;
+            return $transaction->discard();
         }
         if ($transaction->getAction()->getSlot() === 34)
         {
             $this->clearCraftItem();
+            return $transaction->continue();
         }
-        $recipe_data = $this->makeRecipeData();
+        $slot = $transaction->getAction()->getSlot();
+        $nextitem = $transaction->getAction()->getTargetItem();
+        $recipe_data = $this->makeRecipeData($slot, $nextitem);
         foreach ($this->getLoader()->getRecipes() as $recipe)
         {
-            if ($recipe->getRecipeData() === $recipe_data)
+            if ($recipe->getRecipeData() == $recipe_data)
             {
                 $this->setResult($recipe->getResultItem());
-                return;
+                return $transaction->continue();
             }
         }
+        $this->setResult(Item::get(0));
+        return $transaction->continue();
     }
 
-    public function makeRecipeData(): array
+    public function makeRecipeData(int $slot, Item $nextitem): array
     {
         $recipe_data = [];
         for ($i = 0; $i <= 53; $i++)
@@ -60,8 +65,15 @@ class CraftMenu extends BaseMenu
             if (!in_array($i, self::PROTECTED_SLOT))
                 if ($i !== 34)
                 {
-                    $item = $this->menu->getInventory()->getItem($i);
-                    array_push($recipe_data, $item);
+                    if ($i == $slot)
+                    {
+                        array_push($recipe_data, $nextitem);
+                    }
+                    else
+                    {
+                        $item = $this->menu->getInventory()->getItem($i);
+                        array_push($recipe_data, $item);
+                    }
                 }
         }
         return $recipe_data;
@@ -78,7 +90,7 @@ class CraftMenu extends BaseMenu
         {
             if ((!in_array($i, self::PROTECTED_SLOT)) and ($i !== 34))
             {
-                $inv->setItem($i, Item::get(Item::AIR));
+                $this->menu->getInventory()->setItem($i, Item::get(Item::AIR));
             }
         }
     }
