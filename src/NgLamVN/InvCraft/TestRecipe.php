@@ -30,6 +30,18 @@ class TestRecipe
         $result->setCustomName("TESTTTTTTTT");
         $recipe = Recipe::makeRecipe("testlol", $recipe_data, $result);
         $this->loader->setRecipe($recipe);
-        $this->loader->getLogger()->info("RUNNED");
+        $recipe_data2 = [
+            Item::get(Item::SNOWBALL)->setCustomName("SNow 1"),
+            Item::get(Item::SNOWBALL)->setCustomName("SNow 2"),
+            Item::get(Item::SNOWBALL)->setCustomName("SNow 112"),
+            Item::get(Item::SNOWBALL)->setCustomName("SNow 4"),
+            Item::get(Item::SNOWBALL)->setCustomName("SNow 1"),
+            Item::get(Item::SNOWBALL)->setCustomName("SNow 5"),
+            Item::get(Item::SNOWBALL)->setCustomName("SNow 6"),
+            Item::get(Item::SNOWBALL)->setCustomName("SNow 10"),
+        ];
+
+        if ($recipe_data === $recipe_data2) $this->loader->getLogger()->info("TRUEE");
+        else $this->loader->getLogger()->info("FALSE (it runned perfect.)");
     }
 }

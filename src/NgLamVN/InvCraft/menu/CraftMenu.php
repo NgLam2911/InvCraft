@@ -4,6 +4,7 @@ namespace NgLamVN\InvCraft\menu;
 
 use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\transaction\InvMenuTransaction;
+use NgLamVN\InvCraft\Loader;
 use pocketmine\item\Item;
 use pocketmine\Player;
 
@@ -12,18 +13,8 @@ class CraftMenu extends BaseMenu
     const PROTECTED_SLOT = [6, 7, 8, 15, 16, 17, 24, 25, 26, 33, 35, 42, 43, 44, 51, 52, 53];
     //34 is result item.
 
-    /** @var InvMenu $menu */
-    public $menu;
-
-    public function __construct(Player $player)
-    {
-        parent::__construct($player);
-    }
-
     public function menu(Player $player)
     {
-        parent::menu($player);
-
         $this->menu = new InvMenu(InvMenu::TYPE_DOUBLE_CHEST);
         $this->menu->setName("BigCraftingTable");
         $this->menu->setListener(\Closure::fromCallable([$this, "MenuListener"]));
@@ -46,7 +37,19 @@ class CraftMenu extends BaseMenu
             $transaction->discard();
             return;
         }
-
+        if ($transaction->getAction()->getSlot() === 34)
+        {
+            $this->clearCraftItem();
+        }
+        $recipe_data = $this->makeRecipeData();
+        foreach ($this->getLoader()->getRecipes() as $recipe)
+        {
+            if ($recipe->getRecipeData() === $recipe_data)
+            {
+                $this->setResult($recipe->getResultItem());
+                return;
+            }
+        }
     }
 
     public function makeRecipeData(): array
@@ -64,4 +67,19 @@ class CraftMenu extends BaseMenu
         return $recipe_data;
     }
 
+    public function setResult(Item $item)
+    {
+        $this->menu->getInventory()->setItem(34, $item);
+    }
+
+    public function clearCraftItem()
+    {
+        for ($i = 0; $i <= 53; $i++)
+        {
+            if ((!in_array($i, self::PROTECTED_SLOT)) and ($i !== 34))
+            {
+                $inv->setItem($i, Item::get(Item::AIR));
+            }
+        }
+    }
 }
