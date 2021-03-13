@@ -5,6 +5,7 @@ namespace NgLamVN\InvCraft\command;
 use NgLamVN\InvCraft\Loader;
 use NgLamVN\InvCraft\menu\AddRecipeMenu;
 use NgLamVN\InvCraft\menu\CraftMenu;
+use NgLamVN\InvCraft\menu\EditRecipeMenu;
 use NgLamVN\InvCraft\TestRecipe;
 use pocketmine\command\CommandSender;
 use pocketmine\command\ConsoleCommandSender;
@@ -41,8 +42,16 @@ class InvCraftCommand extends PluginCommand
             {
                 return new AddRecipeMenu($sender, $this->getLoader(), "add");
             }
+            if ($args[0] == "edit")
+            {
+                if ($this->getLoader()->getRecipe("add") == null)
+                {
+                    $sender->sendMessage("WHAT WRONG ?");
+                    return;
+                }
+                return new EditRecipeMenu($sender, $this->getLoader(), $this->getLoader()->getRecipe("add"));
+            }
         }
-
         return new CraftMenu($sender, $this->getLoader());
     }
 }

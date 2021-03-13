@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace NgLamVN\InvCraft;
 
 use pocketmine\item\Item;
+use pocketmine\Server;
 
 class Recipe
 {
@@ -22,6 +23,11 @@ class Recipe
         $this->recipe_name = $recipe_name;
         $this->recipe_data = $recipe_data;
         $this->result = $result;
+    }
+
+    public function getLoader(): ?Loader
+    {
+        return Server::getInstance()->getPluginManager()->getPlugin("InvCraft");
     }
 
     /**
@@ -65,7 +71,10 @@ class Recipe
      */
     public function setRecipeName(string $name)
     {
+        $old = clone $this;
+        $this->getLoader()->removeRecipe($old);
         $this->recipe_name = $name;
+        $this->getLoader()->setRecipe($this);
     }
 
     /**
@@ -74,6 +83,7 @@ class Recipe
     public function setRecipeData(array $data)
     {
         $this->recipe_data = $data;
+        $this->getLoader()->setRecipe($this);
     }
 
     /**
@@ -83,6 +93,7 @@ class Recipe
     public function setRecipeItem(int $index, Item $item)
     {
         $this->recipe_data[$index] = $item;
+        $this->getLoader()->setRecipe($this);
     }
 
     public function getResultItem(): Item
@@ -93,5 +104,6 @@ class Recipe
     public function setResultItem(Item $item)
     {
         $this->result = $item;
+        $this->getLoader()->setRecipe($this);
     }
 }

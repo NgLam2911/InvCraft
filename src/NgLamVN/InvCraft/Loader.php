@@ -2,22 +2,28 @@
 
 namespace NgLamVN\InvCraft;
 
+use czechpmdevs\multiworld\generator\normal\object\AcaciaTree;
 use muqsit\invmenu\InvMenuHandler;
 use NgLamVN\InvCraft\command\InvCraftCommand;
 use pocketmine\item\Item;
 use pocketmine\nbt\BigEndianNBTStream;
+use pocketmine\nbt\LittleEndianNBTStream;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\plugin\PluginBase;
 
 class Loader extends PluginBase
 {
-    /** @var Provider $provider */
+    /** @var Provider */
     public $provider;
-    /** @var Recipe $recipes */
+    /** @var Recipe */
     public $recipes = [];
+    /** @var BigEndianNBTStream */
+    public $endianStream;
 
     public function onEnable()
     {
+        $this->endianStream = new BigEndianNBTStream();
+
         if(!InvMenuHandler::isRegistered())
         {
             InvMenuHandler::register($this);
@@ -25,6 +31,8 @@ class Loader extends PluginBase
 
         $this->provider = new Provider($this->getDataFolder());
         $this->provider->open();
+
+        $this->loadRecipes();
 
         $this->getServer()->getCommandMap()->register("invcraft", new InvCraftCommand($this));
     }
@@ -48,11 +56,11 @@ class Loader extends PluginBase
             $recipe_data = [];
             foreach ($data[$recipe_name]["recipe"] as $item)
             {
-                $nbt = BigEndianNBTStream::fromArray($item);
+                $nbt = $this->endianStream->readCompressed(hex2bin($item));
                 $item = Item::nbtDeserialize($nbt);
                 array_push($recipe_data, $item);
             }
-            $result = Item::nbtDeserialize(BigEndianNBTStream::fromArray($data[$recipe_name]["result"]));
+            $result = Item::nbtDeserialize($this->endianStream->readCompressed(hex2bin($data[$recipe_name]["result"])));
 
             $recipe = Recipe::makeRecipe($recipe_name, $recipe_data, $result);
             $this->setRecipe($recipe);
@@ -64,11 +72,12 @@ class Loader extends PluginBase
         foreach ($this->getRecipes() as $recipe)
         {
             $data = [];
-            $data["result"] = BigEndianNBTStream::toArray($recipe->getResultItem()->nbtSerialize());
+            $data["result"] = bin2hex($this->endianStream->writeCompressed($recipe->getResultItem()->nbtSerialize()));
             $recipe_data = [];
             foreach ($recipe->getRecipeData() as $item)
             {
-                $itemdata = BigEndianNBTStream::toArray($item->nbtSerialize());
+                $itemdata = $this->endianStream->writeCompressed($item->nbtSerialize());
+                $itemdata = bin2hex($itemdata);
                 array_push($recipe_data, $itemdata);
             }
             $data["recipe"] = $recipe_data;
@@ -97,6 +106,11 @@ class Loader extends PluginBase
     public function setRecipe(Recipe $recipe)
     {
         $this->recipes[$recipe->getRecipeName()] = $recipe;
+    }
+
+    public function removeRecipe(Recipe $recipe)
+    {
+        unset($recipe, $this->recipes);
     }
 
 }

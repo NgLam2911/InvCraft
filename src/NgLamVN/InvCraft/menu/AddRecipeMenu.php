@@ -17,8 +17,8 @@ class AddRecipeMenu extends BaseMenu
 
     public function __construct(Player $player, Loader $loader,string $recipe_name)
     {
-        parent::__construct($player, $loader);
         $this->recipe_name = $recipe_name;
+        parent::__construct($player, $loader);
     }
 
     public function menu(Player $player)
