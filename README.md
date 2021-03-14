@@ -5,7 +5,6 @@
 # Install and Run
 * Install InvMenu virion.
 * Download phar [here](https://github.com/NgLamVN/InvCraft/releases) and put it in your plugin folder.
-* Clone this repository into your plugin folder or download zip and extract it to plugin folder.
 * Run server and enjoy...
 # Commands:
 * use /invcraft to open craft menu, only player with `ic.admin` permission can add, edit and remove recipes.
