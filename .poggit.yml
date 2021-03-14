@@ -5,4 +5,11 @@ branches:
 projects:
   InvCraft:
     path: ""
+    icon: ""
+    libs:
+    - src: muqsit/InvMenu/InvMenu
+      branch: master
+      version: ^4.1.0
+    - src: jojoe77777/FormAPI/libFormAPI
+      version: ^1.3.0
 ...
