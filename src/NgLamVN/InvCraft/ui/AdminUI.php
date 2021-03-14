@@ -44,7 +44,6 @@ class AdminUI
             {
                 case 0:
                     return new CraftMenu($player, $this->getLoader());
-                    break;
                 case 1:
                     $this->addRecipe($player);
                     break;
