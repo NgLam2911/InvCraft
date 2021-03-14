@@ -12,7 +12,7 @@ use pocketmine\Player;
 class AddRecipeMenu extends BaseMenu
 {
     const PROTECTED_SLOT = [6, 7, 8, 15, 16, 17, 24, 25, 26, 33, 35, 42, 43, 44, 51, 52];
-
+    /** @var string */
     public $recipe_name;
 
     public function __construct(Player $player, Loader $loader,string $recipe_name)
@@ -61,6 +61,12 @@ class AddRecipeMenu extends BaseMenu
     {
         $recipe_data = $this->makeRecipeData();
         $result = $this->menu->getInventory()->getItem(34);
+
+        if ($result->getId() == Item::AIR)
+        {
+            $this->getPlayer()->sendMessage("Please add result item");
+            return;
+        }
         $recipe = Recipe::makeRecipe($this->recipe_name, $recipe_data, $result);
         $this->getLoader()->setRecipe($recipe);
     }

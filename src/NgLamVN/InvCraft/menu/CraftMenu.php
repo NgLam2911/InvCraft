@@ -4,7 +4,6 @@ namespace NgLamVN\InvCraft\menu;
 
 use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\transaction\InvMenuTransaction;
-use NgLamVN\InvCraft\Loader;
 use pocketmine\item\Item;
 use pocketmine\Player;
 

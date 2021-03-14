@@ -3,14 +3,11 @@
 namespace NgLamVN\InvCraft\command;
 
 use NgLamVN\InvCraft\Loader;
-use NgLamVN\InvCraft\menu\AddRecipeMenu;
 use NgLamVN\InvCraft\menu\CraftMenu;
-use NgLamVN\InvCraft\menu\EditRecipeMenu;
-use NgLamVN\InvCraft\TestRecipe;
+use NgLamVN\InvCraft\ui\AdminUI;
 use pocketmine\command\CommandSender;
 use pocketmine\command\ConsoleCommandSender;
 use pocketmine\command\PluginCommand;
-use pocketmine\plugin\Plugin;
 
 class InvCraftCommand extends PluginCommand
 {
@@ -30,27 +27,22 @@ class InvCraftCommand extends PluginCommand
         return $this->loader;
     }
 
+    /**
+     * @param CommandSender $sender
+     * @param string $commandLabel
+     * @param array $args
+     * @return mixed
+     */
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
         if ($sender instanceof ConsoleCommandSender)
         {
-            return new TestRecipe($this->getLoader());
+            $sender->sendMessage("PLEASE RUN THIS COMMAND IN GAME !");
+            return;
         }
-        if (isset($args[0]))
+        if ($sender->hasPermission("ic.admin"))
         {
-            if ($args[0] == "add")
-            {
-                return new AddRecipeMenu($sender, $this->getLoader(), "add");
-            }
-            if ($args[0] == "edit")
-            {
-                if ($this->getLoader()->getRecipe("add") == null)
-                {
-                    $sender->sendMessage("WHAT WRONG ?");
-                    return;
-                }
-                return new EditRecipeMenu($sender, $this->getLoader(), $this->getLoader()->getRecipe("add"));
-            }
+            return new AdminUI($sender);
         }
         return new CraftMenu($sender, $this->getLoader());
     }

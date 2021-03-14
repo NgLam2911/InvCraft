@@ -2,13 +2,10 @@
 
 namespace NgLamVN\InvCraft;
 
-use czechpmdevs\multiworld\generator\normal\object\AcaciaTree;
 use muqsit\invmenu\InvMenuHandler;
 use NgLamVN\InvCraft\command\InvCraftCommand;
 use pocketmine\item\Item;
 use pocketmine\nbt\BigEndianNBTStream;
-use pocketmine\nbt\LittleEndianNBTStream;
-use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\plugin\PluginBase;
 
 class Loader extends PluginBase
@@ -100,6 +97,7 @@ class Loader extends PluginBase
      */
     public function getRecipes(): array
     {
+        if (!isset($this->recipes)) $this->recipes = [];
         return $this->recipes;
     }
 
@@ -110,7 +108,7 @@ class Loader extends PluginBase
 
     public function removeRecipe(Recipe $recipe)
     {
-        unset($recipe, $this->recipes);
+        unset($this->recipes[$recipe->getRecipeName()]);
     }
 
 }

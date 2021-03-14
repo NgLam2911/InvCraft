@@ -96,11 +96,17 @@ class Recipe
         $this->getLoader()->setRecipe($this);
     }
 
+    /**
+     * @return Item
+     */
     public function getResultItem(): Item
     {
         return $this->result;
     }
 
+    /**
+     * @param Item $item
+     */
     public function setResultItem(Item $item)
     {
         $this->result = $item;
