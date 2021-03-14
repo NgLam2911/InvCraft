@@ -109,6 +109,7 @@ class Loader extends PluginBase
     public function removeRecipe(Recipe $recipe)
     {
         unset($this->recipes[$recipe->getRecipeName()]);
+        $this->getProvider()->removeRecipeData($recipe->getRecipeName());
     }
 
 }

@@ -55,4 +55,9 @@ class Provider
         $this->recipes[$name] = $data;
     }
 
+    public function removeRecipeData(string $name)
+    {
+        unset($this->recipes[$name]);
+    }
+
 }
