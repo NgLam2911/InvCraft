@@ -1,0 +1,8 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/NgLamVN/InvCraft
+build-by-default: true
+branches:
+- rewrite
+projects:
+  InvCraft:
+    path: ""
+...
