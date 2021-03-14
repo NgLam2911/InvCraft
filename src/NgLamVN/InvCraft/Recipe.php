@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace NgLamVN\InvCraft;
 
+use NgLamVN\InvCraft\command\InvCraftCommand;
 use pocketmine\item\Item;
 use pocketmine\Server;
 
@@ -25,9 +26,17 @@ class Recipe
         $this->result = $result;
     }
 
+    /**
+     * @return Loader|null
+     */
     public function getLoader(): ?Loader
     {
-        return Server::getInstance()->getPluginManager()->getPlugin("InvCraft");
+        $loader = Server::getInstance()->getPluginManager()->getPlugin("InvCraft");
+        if ($loader instanceof Loader)
+        {
+            return $loader;
+        }
+        return null;
     }
 
     /**

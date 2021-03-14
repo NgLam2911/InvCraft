@@ -12,7 +12,7 @@ class Loader extends PluginBase
 {
     /** @var Provider */
     public $provider;
-    /** @var Recipe */
+    /** @var Recipe[] */
     public $recipes = [];
     /** @var BigEndianNBTStream */
     public $endianStream;
@@ -97,7 +97,7 @@ class Loader extends PluginBase
      */
     public function getRecipes(): array
     {
-        if (!isset($this->recipes)) $this->recipes = [];
+        if (!isset($this->recipes)) return [];
         return $this->recipes;
     }
 

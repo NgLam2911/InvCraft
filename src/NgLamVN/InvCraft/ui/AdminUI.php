@@ -19,9 +19,17 @@ class AdminUI
         $this->form($player);
     }
 
+    /**
+     * @return Loader|null
+     */
     public function getLoader(): ?Loader
     {
-        return Server::getInstance()->getPluginManager()->getPlugin("InvCraft");
+        $loader = Server::getInstance()->getPluginManager()->getPlugin("InvCraft");
+        if ($loader instanceof Loader)
+        {
+            return $loader;
+        }
+        return null;
     }
 
     public function form (Player $player)
