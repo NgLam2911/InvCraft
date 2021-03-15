@@ -38,6 +38,11 @@ class CraftMenu extends BaseMenu
         }
         if ($transaction->getAction()->getSlot() === 34)
         {
+            $result = $this->menu->getInventory()->getItem(34);
+            if ($result->getId() == Item::AIR)
+            {
+                return $transaction->discard();
+            }
             $this->clearCraftItem();
             return $transaction->continue();
         }
