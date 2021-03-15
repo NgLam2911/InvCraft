@@ -4,6 +4,7 @@ namespace NgLamVN\InvCraft\menu;
 
 use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\transaction\InvMenuTransaction;
+use pocketmine\inventory\Inventory;
 use pocketmine\item\Item;
 use pocketmine\Player;
 
@@ -17,6 +18,7 @@ class CraftMenu extends BaseMenu
         $this->menu = InvMenu::create(InvMenu::TYPE_DOUBLE_CHEST);
         $this->menu->setName("BigCraftingTable");
         $this->menu->setListener(\Closure::fromCallable([$this, "MenuListener"]));
+        $this->menu->setInventoryCloseListener(\Closure::fromCallable([$this, "MenuCloseListener"]));
         $inv = $this->menu->getInventory();
         $item = Item::get(Item::STAINED_GLASS_PANE, 2);
         for ($i = 0; $i <= 53; $i++)
@@ -59,6 +61,20 @@ class CraftMenu extends BaseMenu
         }
         $this->setResult(Item::get(0));
         return $transaction->continue();
+    }
+
+    public function MenuCloseListener(Player $player, Inventory $inventory)
+    {
+        for ($i = 0; $i <= 53; $i++)
+        {
+            if (!in_array($i, self::PROTECTED_SLOT))
+                if ($i !== 34)
+                {
+                    $item = $inventory->getItem($i);
+                    if ($item->getId() !== Item::AIR)
+                        $player->getInventory()->addItem($item);
+                }
+        }
     }
 
     public function makeRecipeData(int $slot, Item $nextitem): array
