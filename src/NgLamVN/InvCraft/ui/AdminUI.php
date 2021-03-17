@@ -56,11 +56,11 @@ class AdminUI
             }
         });
 
-        $form->setTitle("InvCraft Manager");
-        $form->addButton("Craft Table");
-        $form->addButton("Add Recipe");
-        $form->addButton("Edit Recipe");
-        $form->addButton("Remove Recipe");
+        $form->setTitle($this->getLoader()->getProvider()->getMessage("ui.title"));
+        $form->addButton($this->getLoader()->getProvider()->getMessage("ui.craft"));
+        $form->addButton($this->getLoader()->getProvider()->getMessage("ui.add"));
+        $form->addButton($this->getLoader()->getProvider()->getMessage("ui.edit"));
+        $form->addButton($this->getLoader()->getProvider()->getMessage("ui.remove"));
 
         $player->sendForm($form);
     }
@@ -75,22 +75,22 @@ class AdminUI
             }
             if (($data[0] == "") or ($data[0] == " "))
             {
-                $player->sendMessage("Please enter a valid name");
+                $player->sendMessage($this->getLoader()->getProvider()->getMessage("msg.invalidname"));
                 return;
             }
             foreach ($this->getLoader()->getRecipes() as $recipe)
             {
                 if ($recipe->getRecipeName() == $data[0])
                 {
-                    $player->sendMessage("A Recipe with that name already exist !");
+                    $player->sendMessage($this->getLoader()->getProvider()->getMessage("msg.existrecipe"));
                     return;
                 }
             }
             return new AddRecipeMenu($player, $this->getLoader(), $data[0]);
         });
 
-        $form->setTitle("Add Recipe");
-        $form->addInput("Recipe name:", "ABCabc123");
+        $form->setTitle($this->getLoader()->getProvider()->getMessage("ui.add"));
+        $form->addInput($this->getLoader()->getProvider()->getMessage("ui.add.input"), "ABCabc123");
 
         $player->sendForm($form);
     }
@@ -103,6 +103,12 @@ class AdminUI
             array_push($recipes, $recipe);
         }
 
+        if ($recipes == [])
+        {
+            $player->sendMessage($this->getLoader()->getProvider()->getMessage("msg.norecipe"));
+            return;
+        }
+
         $form = new SimpleForm(function (Player $player, $data) use ($recipes)
         {
             if (!isset($data))
@@ -112,7 +118,7 @@ class AdminUI
             return new EditRecipeMenu($player, $this->getLoader(), $recipes[$data]);
         });
 
-        $form->setTitle("Edit Recipe");
+        $form->setTitle($this->getLoader()->getProvider()->getMessage("ui.edit"));
         foreach ($this->getLoader()->getRecipes() as $recipe)
         {
             $form->addButton($recipe->getRecipeName());
@@ -127,6 +133,12 @@ class AdminUI
         foreach ($this->getLoader()->getRecipes() as $recipe)
         {
             array_push($recipes, $recipe);
+        }
+
+        if ($recipes == [])
+        {
+            $player->sendMessage($this->getLoader()->getProvider()->getMessage("msg.norecipe"));
+            return;
         }
 
         $form = new SimpleForm(function (Player $player, $data) use ($recipes)
@@ -151,15 +163,15 @@ class AdminUI
                 return;
             });
 
-            $confirm->setTitle("Confirm");
-            $confirm->setButton1("YES");
-            $confirm->setButton2("NO");
-            $confirm->setContent("Are you want to remove this recipe ?");
+            $confirm->setTitle($this->getLoader()->getProvider()->getMessage("ui.confirm.title"));
+            $confirm->setButton1($this->getLoader()->getProvider()->getMessage("ui.confirm.yes"));
+            $confirm->setButton2($this->getLoader()->getProvider()->getMessage("ui.confirm.no"));
+            $confirm->setContent($this->getLoader()->getProvider()->getMessage("ui.confirm.content"));
 
             $player->sendForm($confirm);
         });
 
-        $form->setTitle("Remove Recipe");
+        $form->setTitle($this->getLoader()->getProvider()->getMessage("ui.remove"));
         foreach ($this->getLoader()->getRecipes() as $recipe)
         {
             $form->addButton($recipe->getRecipeName());

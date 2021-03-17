@@ -5,27 +5,40 @@ declare(strict_types=1);
 namespace NgLamVN\InvCraft;
 
 use pocketmine\utils\Config;
+use pocketmine\Server;
 
 class Provider
 {
-    /** @var string $path*/
-    private $path;
     /** @var Config $config */
     public $config;
     /** @var array $recipes */
     public $recipes;
+    /** @var Config */
+    public $msg;
 
     //YamlProvider "I am noob at MySQL or SQLite"
 
-    public function __construct(string $path)
+    public function __construct()
     {
-        $this->path = $path;
+        //NOTHING.
+    }
+
+    public function getLoader(): ?Loader
+    {
+        $loader = Server::getInstance()->getPluginManager()->getPlugin("InvCraft");
+        if ($loader instanceof Loader)
+        {
+            return $loader;
+        }
+        return null;
     }
 
     public function open()
     {
-        $this->config = new Config($this->path . "recipes.yml", Config::YAML);
+        $this->config = new Config($this->getLoader()->getDataFolder() . "recipes.yml", Config::YAML);
         $this->recipes = $this->config->getAll();
+        $this->getLoader()->saveResource("message.yml");
+        $this->msg = new Config($this->getLoader()->getDataFolder() . "message.yml", Config::YAML);
     }
 
     public function save()
@@ -58,6 +71,11 @@ class Provider
     public function removeRecipeData(string $name)
     {
         unset($this->recipes[$name]);
+    }
+
+    public function getMessage(string $msg)
+    {
+        return $this->msg->get($msg);
     }
 
 }

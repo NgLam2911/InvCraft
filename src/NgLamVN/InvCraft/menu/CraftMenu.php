@@ -16,11 +16,12 @@ class CraftMenu extends BaseMenu
     public function menu(Player $player)
     {
         $this->menu = InvMenu::create(InvMenu::TYPE_DOUBLE_CHEST);
-        $this->menu->setName("BigCraftingTable");
+        $this->menu->setName($this->getLoader()->getProvider()->getMessage("menu.craft"));
         $this->menu->setListener(\Closure::fromCallable([$this, "MenuListener"]));
         $this->menu->setInventoryCloseListener(\Closure::fromCallable([$this, "MenuCloseListener"]));
         $inv = $this->menu->getInventory();
-        $item = Item::get(Item::STAINED_GLASS_PANE, 2);
+        $ids = explode(":", $this->getLoader()->getProvider()->getMessage("menu.item"));
+        $item = Item::get($ids[0], $ids[1]);
         for ($i = 0; $i <= 53; $i++)
         {
             if (in_array($i, self::PROTECTED_SLOT))

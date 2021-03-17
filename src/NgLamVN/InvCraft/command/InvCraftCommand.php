@@ -37,7 +37,7 @@ class InvCraftCommand extends PluginCommand
     {
         if ($sender instanceof ConsoleCommandSender)
         {
-            $sender->sendMessage("PLEASE RUN THIS COMMAND IN GAME !");
+            $sender->sendMessage($this->getLoader()->getProvider()->getMessage("msg.runingame"));
             return;
         }
         if ($sender->hasPermission("ic.admin"))

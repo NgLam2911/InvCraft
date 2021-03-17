@@ -25,11 +25,12 @@ class EditRecipeMenu extends BaseMenu
     public function menu(Player $player)
     {
         $this->menu = InvMenu::create(InvMenu::TYPE_DOUBLE_CHEST);
-        $this->menu->setName("Edit Recipe");
+        $this->menu->setName($this->getLoader()->getProvider()->getMessage("menu.edit"));
         $this->menu->setListener(\Closure::fromCallable([$this, "MenuListener"]));
         $inv = $this->menu->getInventory();
 
-        $item = Item::get(Item::STAINED_GLASS_PANE, 2);
+        $ids = explode(":", $this->getLoader()->getProvider()->getMessage("menu.item"));
+        $item = Item::get($ids[0], $ids[1]);
         for ($i = 0; $i <= 52; $i++)
         {
             if (in_array($i, self::PROTECTED_SLOT))
@@ -37,7 +38,8 @@ class EditRecipeMenu extends BaseMenu
                 $inv->setItem($i, $item);
             }
         }
-        $save = Item::get(Item::SLIMEBALL)->setCustomName("SAVE");
+        $idsave = explode(":", $this->getLoader()->getProvider()->getMessage("menu.save.item"));
+        $save = Item::get($idsave[0], $idsave[1])->setCustomName($this->getLoader()->getProvider()->getMessage("menu.save.name"));
         $inv->setItem(53, $save);
         $this->pasteRecipe($this->recipe);
 

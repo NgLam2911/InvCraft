@@ -1,0 +1,25 @@
+# InvCraft Message Config
+
+menu.craft: "BigCraftingTable"
+menu.add: "Add Recipe"
+menu.edit: "Edit Recipe"
+menu.item: "160:2"
+menu.save.name: "SAVE"
+menu.save.item: "341:0"
+
+ui.title: "InvCraft Manager"
+ui.craft: "Craft Table"
+ui.add: "Add Recipe"
+ui.edit: "Edit Recipe"
+ui.remove: "Remove Recipe"
+ui.add.input: "Recipe name"
+ui.confirm.title: "Confirm"
+ui.confirm.content: "Are you want to remove this recipe"
+ui.confirm.yes: "YES"
+ui.confirm.no: "NO"
+
+msg.invalidname: "Please enter a valid name"
+msg.existrecipe: "A Recipe with that name already exist !"
+msg.norecipe: "Please add some recipe first !"
+msg.missresult: "Please add result item"
+msg.runingame: "PLEASE RUN THIS COMMAND IN GAME !"

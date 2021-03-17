@@ -1,7 +1,7 @@
 name: InvCraft
 main: NgLamVN\InvCraft\Loader
 api: 3.15.0
-version: 0.1-ngl_pub
+version: 0.1
 author: NgLamVN
 description: This plugin is a "update and rewrite" version of CustomCraftUltimate by GreenJajot
 
