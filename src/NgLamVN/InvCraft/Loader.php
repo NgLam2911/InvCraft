@@ -26,7 +26,7 @@ class Loader extends PluginBase
             InvMenuHandler::register($this);
         }
 
-        $this->provider = new Provider($this->getDataFolder());
+        $this->provider = new Provider();
         $this->provider->open();
 
         $this->loadRecipes();
