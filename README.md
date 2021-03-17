@@ -3,5 +3,5 @@
 # Commands:
 * use /invcraft to open craft menu, only player with `ic.admin` permission can add, edit and remove recipes.
 # Permissions:
-`ic.command`: true
-`ic.admin`: op
+* `ic.command`: true
+* `ic.admin`: op
