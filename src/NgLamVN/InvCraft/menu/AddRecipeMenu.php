@@ -82,7 +82,7 @@ class AddRecipeMenu extends BaseMenu
                 if (($i !== 34) and ($i !== 53))
                 {
                     $item = $this->menu->getInventory()->getItem($i);
-                    array_push($recipe_data, $item);
+                    array_push($recipe_data, $this->convert($item));
                 }
         }
         return $recipe_data;

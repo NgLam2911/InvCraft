@@ -88,12 +88,12 @@ class CraftMenu extends BaseMenu
                 {
                     if ($i == $slot)
                     {
-                        array_push($recipe_data, $nextitem);
+                        array_push($recipe_data, $this->convert($nextitem));
                     }
                     else
                     {
                         $item = $this->menu->getInventory()->getItem($i);
-                        array_push($recipe_data, $item);
+                        array_push($recipe_data, $this->convert($item));
                     }
                 }
         }
