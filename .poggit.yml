@@ -9,7 +9,7 @@ projects:
     icon: ""
     libs:
     - src: Muqsit/InvMenu/Invmenu
-      branch: 4.0
+      branch: "4.0"
       version: ^4.3.3
     - src: JinodkDevTeam/FormAPI/libFormAPI
       version: ^1.4.0-alpha
