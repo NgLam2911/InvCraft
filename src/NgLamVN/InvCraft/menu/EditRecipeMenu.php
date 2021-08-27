@@ -82,7 +82,7 @@ class EditRecipeMenu extends BaseMenu
         if ($transaction->getAction()->getSlot() === self::SAVE_SLOT)
         {
             $this->save();
-            $transaction->getPlayer()->removeCurrentWindow();
+            $this->menu->onClose($transaction->getPlayer());
             return $transaction->discard();
         }
         return $transaction->continue();
@@ -96,6 +96,7 @@ class EditRecipeMenu extends BaseMenu
         $this->recipe->setResultItem($result);
 		foreach($this->getLoader()->getRecipes() as $other)
 		{
+			if ($other->getRecipeName() == $this->recipe->getRecipeName()) continue;
 			if ($other->equal($this->recipe))
 			{
 				if ($other->getMode() == $this->recipe->getMode())

@@ -66,7 +66,20 @@ class CraftMenu extends BaseMenu
                 return $transaction->discard();
             }
             $this->clearCraftItem();
-            return $transaction->continue();
+            return $transaction->continue()->then(function(){
+				$recipe_data = $this->makeRecipeData();
+				foreach($this->getLoader()->getRecipes() as $recipe)
+				{
+					if ($recipe->equal($recipe_data))
+					{
+						if ($recipe->getMode() == $this->getMode())
+						{
+							$this->setResult($recipe->getResultItem());
+							$this->correct_recipe = $recipe;
+						}
+					}
+				}
+			});
         }
         $slot = $transaction->getAction()->getSlot();
         $nextitem = $transaction->getAction()->getTargetItem();
@@ -143,18 +156,6 @@ class CraftMenu extends BaseMenu
     		foreach($this->correct_recipe->getRecipeData() as $item)
     		{
 				ItemUtils::removeItem($this->menu->getInventory(), $item);
-			}
-    		$recipe_data = $this->makeRecipeData();
-    		foreach($this->getLoader()->getRecipes() as $recipe)
-    		{
-				if ($recipe->equal($recipe_data))
-				{
-					if ($recipe->getMode() == $this->getMode())
-					{
-						$this->setResult($recipe->getResultItem());
-						$this->correct_recipe = $recipe;
-					}
-				}
 			}
     		return;
 		}

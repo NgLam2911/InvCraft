@@ -61,7 +61,7 @@ class AddRecipeMenu extends BaseMenu
         if ($transaction->getAction()->getSlot() === self::SAVE_SLOT)
         {
             $this->save();
-            $transaction->getPlayer()->removeCurrentWindow();
+            $this->menu->onClose($transaction->getPlayer());
             return $transaction->discard();
         }
         return $transaction->continue();
