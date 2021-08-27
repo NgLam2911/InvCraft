@@ -10,11 +10,11 @@ use pocketmine\Server;
 class Provider
 {
     /** @var Config $config */
-    public $config;
+    public Config $config;
     /** @var array $recipes */
-    public $recipes;
+    public array $recipes;
     /** @var Config */
-    public $msg;
+    public Config $msg;
 
     //YamlProvider "I am noob at MySQL or SQLite"
 

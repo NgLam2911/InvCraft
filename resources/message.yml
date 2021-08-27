@@ -1,11 +1,13 @@
 # InvCraft Message Config
 
-menu.craft: "BigCraftingTable"
+menu.craft6x6: "BigCraftingTable"
+menu.craft3x3: "NormalCraftingTable"
 menu.add: "Add Recipe"
 menu.edit: "Edit Recipe"
 menu.item: "160:2"
 menu.save.name: "SAVE"
 menu.save.item: "341:0"
+menu.view: "View Recipe"
 
 ui.title: "InvCraft Manager"
 ui.craft: "Craft Table"
@@ -17,6 +19,10 @@ ui.confirm.title: "Confirm"
 ui.confirm.content: "Are you want to remove this recipe"
 ui.confirm.yes: "YES"
 ui.confirm.no: "NO"
+ui.3x3recipe: "3x3 Recipe"
+ui.6x6recipe: "6x6 Recipe"
+ui.list: "List Recipes"
+ui.title.player: "InvCraft Menu"
 
 msg.invalidname: "Please enter a valid name"
 msg.existrecipe: "A Recipe with that name already exist !"

@@ -1,26 +1,22 @@
 <?php
+declare(strict_types=1);
 
 namespace NgLamVN\InvCraft;
 
+use JinodkDevTeam\utils\ItemUtils;
 use muqsit\invmenu\InvMenuHandler;
 use NgLamVN\InvCraft\command\InvCraftCommand;
-use pocketmine\item\Item;
-use pocketmine\nbt\BigEndianNBTStream;
 use pocketmine\plugin\PluginBase;
 
 class Loader extends PluginBase
 {
     /** @var Provider */
-    public $provider;
+    public Provider $provider;
     /** @var Recipe[] */
-    public $recipes = [];
-    /** @var BigEndianNBTStream */
-    public $endianStream;
+    public array $recipes = [];
 
-    public function onEnable()
+    public function onEnable(): void
     {
-        $this->endianStream = new BigEndianNBTStream();
-
         if(!InvMenuHandler::isRegistered())
         {
             InvMenuHandler::register($this);
@@ -34,7 +30,7 @@ class Loader extends PluginBase
         $this->getServer()->getCommandMap()->register("invcraft", new InvCraftCommand($this));
     }
 
-    public function onDisable()
+    public function onDisable(): void
     {
         $this->saveRecipes();
         $this->getProvider()->save();
@@ -53,13 +49,15 @@ class Loader extends PluginBase
             $recipe_data = [];
             foreach ($data[$recipe_name]["recipe"] as $item)
             {
-                $nbt = $this->endianStream->readCompressed(hex2bin($item));
-                $item = Item::nbtDeserialize($nbt);
-                array_push($recipe_data, $item);
+                array_push($recipe_data, ItemUtils::fromString($item));
             }
-            $result = Item::nbtDeserialize($this->endianStream->readCompressed(hex2bin($data[$recipe_name]["result"])));
-
-            $recipe = Recipe::makeRecipe($recipe_name, $recipe_data, $result);
+            $result = ItemUtils::fromString($data[$recipe_name]["result"]);
+            if (!isset($data[$recipe_name]["mode"]))
+            {
+                $mode = Recipe::VIxVI_MODE;
+            }
+            else $mode = $data[$recipe_name]["mode"];
+            $recipe = Recipe::makeRecipe($recipe_name, $recipe_data, $result, $mode);
             $this->setRecipe($recipe);
         }
     }
@@ -69,23 +67,23 @@ class Loader extends PluginBase
         foreach ($this->getRecipes() as $recipe)
         {
             $data = [];
-            $data["result"] = bin2hex($this->endianStream->writeCompressed($recipe->getResultItem()->nbtSerialize()));
+            $data["result"] = ItemUtils::toString($recipe->getResultItem());
             $recipe_data = [];
             foreach ($recipe->getRecipeData() as $item)
             {
-                $itemdata = $this->endianStream->writeCompressed($item->nbtSerialize());
-                $itemdata = bin2hex($itemdata);
-                array_push($recipe_data, $itemdata);
+                array_push($recipe_data, ItemUtils::toString($item));
             }
             $data["recipe"] = $recipe_data;
+            $data["mode"] = $recipe->getMode();
             $this->getProvider()->setRecipeData($recipe->getRecipeName(), $data);
         }
     }
 
-    /**
-     * @param string $name
-     * @return Recipe
-     */
+	/**
+	 * @param string $name
+	 *
+	 * @return Recipe|null
+	 */
     public function getRecipe(string $name): ?Recipe
     {
         if (isset($this->recipes[$name])) return $this->recipes[$name];

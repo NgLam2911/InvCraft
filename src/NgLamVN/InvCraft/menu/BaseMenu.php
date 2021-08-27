@@ -1,26 +1,31 @@
 <?php
+declare(strict_types=1);
 
 namespace NgLamVN\InvCraft\menu;
 
 use muqsit\invmenu\InvMenu;
 use NgLamVN\InvCraft\Loader;
-use pocketmine\item\Item;
-use pocketmine\nbt\BigEndianNBTStream;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 abstract class BaseMenu
 {
     /** @var InvMenu */
-    public $menu;
+    public InvMenu $menu;
     /** @var Loader */
-    public $loader;
+    public Loader $loader;
     /** @var Player */
-    public $player;
+    public Player $player;
+    /** @var int */
+    public int $mode;
 
-    public function __construct(Player $player, Loader $loader)
+    const IIIxIII_MODE = 0;
+    const VIxVI_MODE = 1;
+
+    public function __construct(Player $player, Loader $loader, int $mode = 0)
     {
         $this->player = $player;
         $this->loader = $loader;
+        $this->mode = $mode;
         $this->menu($player);
     }
 
@@ -40,19 +45,15 @@ abstract class BaseMenu
         return $this->loader;
     }
 
+    public function getMode(): int
+	{
+        return $this->mode;
+    }
+
     /**
      * @param Player $player
      */
     public function menu(Player $player)
     {
-    }
-
-    public function convert(Item $item): Item
-    {
-        $nbt = $item->nbtSerialize();
-        $stream = new BigEndianNBTStream();
-        $str = $stream->writeCompressed($nbt);
-        $nbt = $stream->readCompressed($str);
-        return Item::nbtDeserialize($nbt);
     }
 }
