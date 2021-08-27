@@ -4,10 +4,12 @@ declare(strict_types=1);
 namespace NgLamVN\InvCraft\menu;
 
 use Closure;
+use JinodkDevTeam\utils\ItemUtils;
 use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\transaction\InvMenuTransaction;
 use muqsit\invmenu\transaction\InvMenuTransactionResult;
 use muqsit\invmenu\type\InvMenuTypeIds;
+use NgLamVN\InvCraft\Recipe;
 use pocketmine\inventory\Inventory;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
@@ -21,7 +23,9 @@ class CraftMenu extends BaseMenu
     const IIIxIII_PROTECTED_SLOT = [0,1,2,3,4,5,6,7,8,9,10,14,15,16,17,18,19,23,24,26,27,28,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53];
     const IIIxIII_RESULT_SLOT = 25;
 
-    public function menu(Player $player)
+    protected ?Recipe $correct_recipe = null;
+
+    public function menu(Player $player): void
     {
         $this->menu = InvMenu::create(InvMenuTypeIds::TYPE_DOUBLE_CHEST);
         if ($this->mode == self::VIxVI_MODE)
@@ -69,20 +73,22 @@ class CraftMenu extends BaseMenu
         $recipe_data = $this->makeRecipeData($slot, $nextitem);
         foreach ($this->getLoader()->getRecipes() as $recipe)
         {
-            if ($recipe->getRecipeData() == $recipe_data)
+            if ($recipe->equal($recipe_data))
             {
                 if ($recipe->getMode() == $this->getMode())
                 {
                     $this->setResult($recipe->getResultItem());
+                    $this->correct_recipe = $recipe;
                     return $transaction->continue();
                 }
             }
         }
         $this->setResult(ItemFactory::getInstance()->get(0));
+        $this->correct_recipe = null;
         return $transaction->continue();
     }
 
-    public function MenuCloseListener(Player $player, Inventory $inventory)
+    public function MenuCloseListener(Player $player, Inventory $inventory): void
     {
         for ($i = 0; $i <= 53; $i++)
         {
@@ -96,6 +102,12 @@ class CraftMenu extends BaseMenu
         }
     }
 
+	/**
+	 * @param int  $slot
+	 * @param Item $nextitem
+	 *
+	 * @return Item[]
+	 */
     public function makeRecipeData(int $slot, Item $nextitem): array
     {
         $recipe_data = [];
@@ -118,13 +130,21 @@ class CraftMenu extends BaseMenu
         return $recipe_data;
     }
 
-    public function setResult(Item $item)
+    public function setResult(Item $item): void
     {
         $this->menu->getInventory()->setItem($this->getResultSlot(), $item);
     }
 
-    public function clearCraftItem()
+    public function clearCraftItem(): void
     {
+    	if ($this->correct_recipe !== null)
+    	{
+    		foreach($this->correct_recipe->getRecipeData() as $item)
+    		{
+				ItemUtils::removeItem($this->menu->getInventory(), $item);
+			}
+    		return;
+		}
         for ($i = 0; $i <= 53; $i++)
         {
             if ((!in_array($i, $this->getProtectedSlot())) and ($i !== $this->getResultSlot()))

@@ -3,12 +3,15 @@ declare(strict_types=1);
 
 namespace NgLamVN\InvCraft\menu;
 
+use Closure;
 use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\transaction\InvMenuTransaction;
+use muqsit\invmenu\transaction\InvMenuTransactionResult;
+use muqsit\invmenu\type\InvMenuTypeIds;
 use NgLamVN\InvCraft\Loader;
 use NgLamVN\InvCraft\Recipe;
+use pocketmine\item\ItemFactory;
 use pocketmine\player\Player;
-use pocketmine\item\Item;
 
 class ViewRecipe extends BaseMenu
 {
@@ -18,7 +21,7 @@ class ViewRecipe extends BaseMenu
     const IIIxIII_RESULT_SLOT = 25;
 
     /** @var Recipe $recipe */
-    public $recipe;
+    public Recipe $recipe;
 
     public function __construct(Player $player, Loader $loader, Recipe $recipe)
     {
@@ -28,15 +31,15 @@ class ViewRecipe extends BaseMenu
 
     }
 
-    public function menu(Player $player)
+    public function menu(Player $player): void
     {
-        $this->menu = InvMenu::create(InvMenu::TYPE_DOUBLE_CHEST);
+        $this->menu = InvMenu::create(InvMenuTypeIds::TYPE_DOUBLE_CHEST);
         $this->menu->setName($this->getLoader()->getProvider()->getMessage("menu.view"));
-        $this->menu->setListener(\Closure::fromCallable([$this, "MenuListener"]));
+        $this->menu->setListener(Closure::fromCallable([$this, "MenuListener"]));
         $inv = $this->menu->getInventory();
 
         $ids = explode(":", $this->getLoader()->getProvider()->getMessage("menu.item"));
-        $item = Item::get($ids[0], $ids[1]);
+        $item = ItemFactory::getInstance()->get((int)$ids[0], (int)$ids[1]);
         for ($i = 0; $i <= 53; $i++)
         {
             if (in_array($i, $this->getProtectedSlot()))
@@ -49,7 +52,7 @@ class ViewRecipe extends BaseMenu
         $this->menu->send($player);
     }
 
-    public function pasteRecipe(Recipe $recipe)
+    public function pasteRecipe(Recipe $recipe): void
     {
         $recipe_data = $recipe->getRecipeData();
         $result = $recipe->getResultItem();
@@ -68,7 +71,7 @@ class ViewRecipe extends BaseMenu
         }
     }
 
-    public function MenuListener(InvMenuTransaction $transaction)
+    public function MenuListener(InvMenuTransaction $transaction): InvMenuTransactionResult
     {
         return $transaction->discard();
     }

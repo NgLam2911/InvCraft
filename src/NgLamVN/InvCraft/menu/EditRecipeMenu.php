@@ -30,7 +30,7 @@ class EditRecipeMenu extends BaseMenu
         parent::__construct($player, $loader, $mode);
     }
 
-    public function menu(Player $player)
+    public function menu(Player $player): void
     {
         $this->menu = InvMenu::create(InvMenuTypeIds::TYPE_DOUBLE_CHEST);
         $this->menu->setName($this->getLoader()->getProvider()->getMessage("menu.edit"));
@@ -54,7 +54,7 @@ class EditRecipeMenu extends BaseMenu
         $this->menu->send($player);
     }
 
-    public function pasteRecipe(Recipe $recipe)
+    public function pasteRecipe(Recipe $recipe): void
     {
         $recipe_data = $recipe->getRecipeData();
         $result = $recipe->getResultItem();
@@ -73,7 +73,8 @@ class EditRecipeMenu extends BaseMenu
         }
     }
 
-    public function MenuListener(InvMenuTransaction $transaction) : InvMenuTransactionResult{
+    public function MenuListener(InvMenuTransaction $transaction) : InvMenuTransactionResult
+	{
         if (in_array($transaction->getAction()->getSlot(), $this->getProtectedSlot()))
         {
             return $transaction->discard();
@@ -87,7 +88,7 @@ class EditRecipeMenu extends BaseMenu
         return $transaction->continue();
     }
 
-    public function save()
+    public function save(): void
     {
         $recipe_data = $this->makeRecipeData();
         $result = $this->menu->getInventory()->getItem($this->getResultSlot());

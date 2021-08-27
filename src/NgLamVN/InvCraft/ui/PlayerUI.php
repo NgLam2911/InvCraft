@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace NgLamVN\InvCraft\ui;
 
@@ -41,9 +42,11 @@ class PlayerUI
             switch ($data)
             {
                 case 0:
-                    return new CraftMenu($player, $this->getLoader(), Recipe::VIxVI_MODE);
+                    new CraftMenu($player, $this->getLoader(), Recipe::VIxVI_MODE);
+                    return;
                 case 1:
-                    return new CraftMenu($player, $this->getLoader(), Recipe::IIIxIII_MODE);
+                    new CraftMenu($player, $this->getLoader(), Recipe::IIIxIII_MODE);
+                    return;
                 case 2:
                     $this->viewRecipe($player);
                     break;
@@ -77,7 +80,7 @@ class PlayerUI
             {
                 return;
             }
-            return new ViewRecipe($player, $this->getLoader(), $recipes[$data]);
+            new ViewRecipe($player, $this->getLoader(), $recipes[$data]);
         });
 
         $form->setTitle($this->getLoader()->getProvider()->getMessage("ui.list"));

@@ -21,7 +21,26 @@ class Recipe
     const IIIxIII_MODE = 0;
     const VIxVI_MODE = 1;
 
-    //Press "F" for PHP 7.3 and below, I can't implement like this: public string $recipe_name; | It only work on PHP 7.4+
+	/**
+	 * @param Recipe|Item[] $other
+	 *
+	 * @return bool
+	 */
+	public function equal(Recipe|array $other): bool
+	{
+		if ($other instanceof Recipe)
+		{
+			$other = $other->getRecipeData();
+		}
+		foreach(array_keys($this->getRecipeData()) as $key)
+		{
+			if (!$this->getRecipeData()[$key]->canStackWith($other[$key]))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 
     public function __construct(string $recipe_name, array $recipe_data, Item $result, int $mode)
     {

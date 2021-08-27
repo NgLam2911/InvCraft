@@ -53,7 +53,7 @@ abstract class BaseMenu
     /**
      * @param Player $player
      */
-    public function menu(Player $player)
+    public function menu(Player $player): void
     {
     }
 }

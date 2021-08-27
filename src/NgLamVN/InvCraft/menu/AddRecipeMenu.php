@@ -30,7 +30,7 @@ class AddRecipeMenu extends BaseMenu
         parent::__construct($player, $loader, $mode);
     }
 
-    public function menu(Player $player)
+    public function menu(Player $player): void
     {
         $this->menu = InvMenu::create(InvMenuTypeIds::TYPE_DOUBLE_CHEST);
         $this->menu->setName($this->getLoader()->getProvider()->getMessage("menu.add"));
@@ -67,7 +67,7 @@ class AddRecipeMenu extends BaseMenu
         return $transaction->continue();
     }
 
-    public function save()
+    public function save(): void
     {
         $recipe_data = $this->makeRecipeData();
         $result = $this->menu->getInventory()->getItem($this->getResultSlot());

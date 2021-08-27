@@ -46,9 +46,11 @@ class AdminUI
             switch ($data)
             {
                 case 0:
-                    return new CraftMenu($player, $this->getLoader(), Recipe::VIxVI_MODE);
+                    new CraftMenu($player, $this->getLoader(), Recipe::VIxVI_MODE);
+                    return;
                 case 1:
-                    return new CraftMenu($player, $this->getLoader(), Recipe::IIIxIII_MODE);
+                    new CraftMenu($player, $this->getLoader(), Recipe::IIIxIII_MODE);
+                    return;
                 case 2:
                     $this->addRecipe($player);
                     break;
@@ -92,6 +94,7 @@ class AdminUI
                 $player->sendMessage($this->getLoader()->getProvider()->getMessage("msg.invalidname"));
                 return;
             }
+            $mode = Recipe::VIxVI_MODE;
             if ($data[1] == 0)
             {
                 $mode = Recipe::VIxVI_MODE;
@@ -108,7 +111,7 @@ class AdminUI
                     return;
                 }
             }
-            return new AddRecipeMenu($player, $this->getLoader(), $mode, $data[0]);
+            new AddRecipeMenu($player, $this->getLoader(), $mode, $data[0]);
         });
 
         $form->setTitle($this->getLoader()->getProvider()->getMessage("ui.add"));
@@ -138,7 +141,7 @@ class AdminUI
             {
                 return;
             }
-            return new EditRecipeMenu($player, $this->getLoader(), $recipes[$data]);
+            new EditRecipeMenu($player, $this->getLoader(), $recipes[$data]);
         });
 
         $form->setTitle($this->getLoader()->getProvider()->getMessage("ui.edit"));
@@ -181,9 +184,7 @@ class AdminUI
                 if ($data2 == true)
                 {
                     $this->getLoader()->removeRecipe($re);
-                    return;
                 }
-                return;
             });
 
             $confirm->setTitle($this->getLoader()->getProvider()->getMessage("ui.confirm.title"));
