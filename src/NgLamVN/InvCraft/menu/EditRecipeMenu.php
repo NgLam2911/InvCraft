@@ -94,6 +94,17 @@ class EditRecipeMenu extends BaseMenu
         $result = $this->menu->getInventory()->getItem($this->getResultSlot());
         $this->recipe->setRecipeData($recipe_data);
         $this->recipe->setResultItem($result);
+		foreach($this->getLoader()->getRecipes() as $other)
+		{
+			if ($other->equal($this->recipe))
+			{
+				if ($other->getMode() == $this->recipe->getMode())
+				{
+					$this->getPlayer()->sendMessage($this->getLoader()->getProvider()->getMessage("msg.sametyperecipe"));
+					break;
+				}
+			}
+		}
     }
 
     public function makeRecipeData(): array

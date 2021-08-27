@@ -103,12 +103,12 @@ class CraftMenu extends BaseMenu
     }
 
 	/**
-	 * @param int  $slot
-	 * @param Item $nextitem
+	 * @param null|int  $slot
+	 * @param null|Item $nextitem
 	 *
 	 * @return Item[]
 	 */
-    public function makeRecipeData(int $slot, Item $nextitem): array
+    public function makeRecipeData(?int $slot = null, ?Item $nextitem = null): array
     {
         $recipe_data = [];
         for ($i = 0; $i <= 53; $i++)
@@ -116,15 +116,16 @@ class CraftMenu extends BaseMenu
             if (!in_array($i, $this->getProtectedSlot()))
                 if ($i !== $this->getResultSlot())
                 {
-                    if ($i == $slot)
-                    {
-                        array_push($recipe_data, $nextitem);
-                    }
-                    else
-                    {
-                        $item = $this->menu->getInventory()->getItem($i);
-                        array_push($recipe_data, $item);
-                    }
+                	if (($slot !== null) and ($nextitem !== null))
+                	{
+						if ($i == $slot)
+						{
+							array_push($recipe_data, $nextitem);
+							continue;
+						}
+					}
+					$item = $this->menu->getInventory()->getItem($i);
+					array_push($recipe_data, $item);
                 }
         }
         return $recipe_data;
@@ -142,6 +143,18 @@ class CraftMenu extends BaseMenu
     		foreach($this->correct_recipe->getRecipeData() as $item)
     		{
 				ItemUtils::removeItem($this->menu->getInventory(), $item);
+			}
+    		$recipe_data = $this->makeRecipeData();
+    		foreach($this->getLoader()->getRecipes() as $recipe)
+    		{
+				if ($recipe->equal($recipe_data))
+				{
+					if ($recipe->getMode() == $this->getMode())
+					{
+						$this->setResult($recipe->getResultItem());
+						$this->correct_recipe = $recipe;
+					}
+				}
 			}
     		return;
 		}

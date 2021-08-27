@@ -78,6 +78,17 @@ class AddRecipeMenu extends BaseMenu
             return;
         }
         $recipe = Recipe::makeRecipe($this->recipe_name, $recipe_data, $result, $this->getMode());
+        foreach($this->getLoader()->getRecipes() as $other)
+        {
+        	if ($other->equal($recipe))
+        	{
+        		if ($other->getMode() == $recipe->getMode())
+				{
+					$this->getPlayer()->sendMessage($this->getLoader()->getProvider()->getMessage("msg.sametyperecipe"));
+					break;
+				}
+			}
+		}
         $this->getLoader()->setRecipe($recipe);
     }
 
