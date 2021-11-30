@@ -12,45 +12,40 @@ use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginOwned;
 
-class InvCraftCommand extends Command implements PluginOwned
-{
-    public Loader $loader;
+class InvCraftCommand extends Command implements PluginOwned{
+	public Loader $loader;
 
-    public function __construct(Loader $loader)
-    {
-        $this->loader = $loader;
-        parent::__construct("invcraft");
-        $this->setDescription("InvCraft Command");
-        $this->setPermission("ic.command");
-    }
+	public function __construct(Loader $loader){
+		$this->loader = $loader;
+		parent::__construct("invcraft");
+		$this->setDescription("InvCraft Command");
+		$this->setPermission("ic.command");
+	}
 
-    public function getLoader(): Loader
-    {
-        return $this->loader;
-    }
+	/**
+	 * @param CommandSender $sender
+	 * @param string        $commandLabel
+	 * @param array         $args
+	 *
+	 * @return mixed
+	 */
+	public function execute(CommandSender $sender, string $commandLabel, array $args) : void{
+		if(!$sender instanceof Player){
+			$sender->sendMessage($this->getLoader()->getProvider()->getMessage("msg.runingame"));
+			return;
+		}
+		if($sender->hasPermission("ic.admin")){
+			new AdminUI($sender);
+			return;
+		}
+		new PlayerUI($sender);
+	}
 
-    /**
-     * @param CommandSender $sender
-     * @param string $commandLabel
-     * @param array $args
-     * @return mixed
-     */
-    public function execute(CommandSender $sender, string $commandLabel, array $args): void
-    {
-        if (!$sender instanceof Player)
-        {
-            $sender->sendMessage($this->getLoader()->getProvider()->getMessage("msg.runingame"));
-            return;
-        }
-        if ($sender->hasPermission("ic.admin"))
-        {
-            new AdminUI($sender);
-            return;
-        }
-        new PlayerUI($sender);
-    }
+	public function getLoader() : Loader{
+		return $this->loader;
+	}
 
-    public function getOwningPlugin() : Plugin{
+	public function getOwningPlugin() : Plugin{
 		return $this->getLoader();
 	}
 }
