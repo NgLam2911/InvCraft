@@ -26,8 +26,6 @@ class InvCraftCommand extends Command implements PluginOwned{
 	 * @param CommandSender $sender
 	 * @param string        $commandLabel
 	 * @param array         $args
-	 *
-	 * @return mixed
 	 */
 	public function execute(CommandSender $sender, string $commandLabel, array $args) : void{
 		if(!$sender instanceof Player){
