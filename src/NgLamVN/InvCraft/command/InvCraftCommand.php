@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace NgLamVN\InvCraft\command;
 
 use NgLamVN\InvCraft\Loader;
+use NgLamVN\InvCraft\menu\ViewRecipe;
+use NgLamVN\InvCraft\Recipe;
 use NgLamVN\InvCraft\ui\AdminUI;
 use NgLamVN\InvCraft\ui\PlayerUI;
 use pocketmine\command\Command;
@@ -26,17 +28,34 @@ class InvCraftCommand extends Command implements PluginOwned{
 	 * @param CommandSender $sender
 	 * @param string        $commandLabel
 	 * @param array         $args
+	 *
+	 * @return void
 	 */
 	public function execute(CommandSender $sender, string $commandLabel, array $args) : void{
 		if(!$sender instanceof Player){
 			$sender->sendMessage($this->getLoader()->getProvider()->getMessage("msg.runingame"));
 			return;
 		}
-		if($sender->hasPermission("ic.admin")){
-			new AdminUI($sender);
-			return;
+		if (!isset($args[0])){
+			if($sender->hasPermission("ic.admin")){
+				new AdminUI($sender);
+				return;
+			}
+			new PlayerUI($sender);
 		}
-		new PlayerUI($sender);
+		if($args[0] == "view"){
+			if(isset($args[1])){
+				$name = $args[1];
+				$recipe = $this->getLoader()->getRecipe($name);
+				if(!$recipe instanceof Recipe){
+					$sender->sendMessage($this->getLoader()->getProvider()->getMessage("command.recipenotfound"));
+					return;
+				}
+				new ViewRecipe($sender, $this->getLoader(), $recipe);
+			}else{
+				$sender->sendMessage($this->getLoader()->getProvider()->getMessage("command.missrecipename"));
+			}
+		}
 	}
 
 	public function getLoader() : Loader{

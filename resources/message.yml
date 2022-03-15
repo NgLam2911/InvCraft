@@ -30,3 +30,6 @@ msg.norecipe: "Please add some recipe first !"
 msg.missresult: "Please add result item"
 msg.runingame: "PLEASE RUN THIS COMMAND IN GAME !"
 msg.sametyperecipe: "Warning: This recipe have same recipe data with a added recipe, it will create a wrong result !"
+
+command.missrecipename: "/invcraft view <recipe name>"
+command.recipenotfound: "Recipe not found !"

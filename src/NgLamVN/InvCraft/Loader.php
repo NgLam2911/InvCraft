@@ -80,8 +80,8 @@ class Loader extends PluginBase{
 
 	/**
 	 * @param string $name
-	 *
 	 * @return Recipe|null
+	 *
 	 */
 	public function getRecipe(string $name) : ?Recipe{
 		if(isset($this->recipes[$name])) return $this->recipes[$name];
