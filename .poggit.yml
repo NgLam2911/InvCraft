@@ -6,7 +6,7 @@ branches:
 projects:
   InvCraft:
     path: ""
-    icon: ""
+    icon: "icon.png"
     libs:
     - src: Muqsit/InvMenu/Invmenu
       branch: "4.0"
