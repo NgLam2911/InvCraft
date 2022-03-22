@@ -113,7 +113,7 @@ class EditRecipeMenu extends BaseMenu{
 			if(!in_array($i, $this->getProtectedSlot()))
 				if(($i !== $this->getResultSlot()) and ($i !== self::SAVE_SLOT)){
 					$item = $this->menu->getInventory()->getItem($i);
-					array_push($recipe_data, $item);
+					$recipe_data[] = $item;
 				}
 		}
 		return $recipe_data;

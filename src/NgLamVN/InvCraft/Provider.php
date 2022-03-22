@@ -36,6 +36,9 @@ class Provider{
 		return null;
 	}
 
+	/**
+	 * @throws \JsonException
+	 */
 	public function save(){
 		$this->config->setAll($this->recipes);
 		$this->config->save();

@@ -32,7 +32,7 @@ class Loader extends PluginBase{
 		foreach(array_keys($data) as $recipe_name){
 			$recipe_data = [];
 			foreach($data[$recipe_name]["recipe"] as $item){
-				array_push($recipe_data, ItemUtils::fromString($item));
+				$recipe_data[] = ItemUtils::fromString($item);
 			}
 			$result = ItemUtils::fromString($data[$recipe_name]["result"]);
 			if(!isset($data[$recipe_name]["mode"])){
@@ -62,7 +62,7 @@ class Loader extends PluginBase{
 			$data["result"] = ItemUtils::toString($recipe->getResultItem());
 			$recipe_data = [];
 			foreach($recipe->getRecipeData() as $item){
-				array_push($recipe_data, ItemUtils::toString($item));
+				$recipe_data[] = ItemUtils::toString($item);
 			}
 			$data["recipe"] = $recipe_data;
 			$data["mode"] = $recipe->getMode();
