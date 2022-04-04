@@ -1,8 +1,8 @@
 name: InvCraft
 main: NgLamVN\InvCraft\Loader
 api: 4.0.0
-version: 0.2.2
-author: NgLamVN
+version: 0.2.3
+author: NgLam2911
 
 permissions:
   ic.command:

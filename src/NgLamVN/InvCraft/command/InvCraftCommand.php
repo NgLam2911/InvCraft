@@ -42,6 +42,7 @@ class InvCraftCommand extends Command implements PluginOwned{
 				return;
 			}
 			new PlayerUI($sender);
+			return;
 		}
 		if($args[0] == "view"){
 			if(isset($args[1])){
