@@ -1,18 +1,24 @@
---- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/NgLamVN/InvCraft
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/NgLam2911/InvCraft
 build-by-default: true
 branches:
-- pm3
-- pm4
+  - pm3
+  - pm4
 projects:
   InvCraft:
     path: ""
     icon: "icon.png"
     libs:
-    - src: Muqsit/InvMenu/Invmenu
-      branch: "4.0"
-      version: ^4.3.3
-    - src: JinodkDevTeam/FormAPI/libFormAPI
-      version: ^1.4.0-alpha
-    - src: JinodkDevTeam/FI-Utils/FI-Utils
-      version: ^0.1.1
+      - src: Muqsit/InvMenu/Invmenu
+        branch: "4.0"
+        version: ^4.3.3
+      - src: JinodkDevTeam/FormAPI/libFormAPI
+        version: ^1.4.0-alpha
+      - src: JinodkDevTeam/FI-Utils/FI-Utils
+        version: ^0.1.1
+      - src: ifera-mc/UpdateNotifier/UpdateNotifier
+          version: ^3.0.0
+          branch: master
+      - src: ifera-mc/ConfigUpdater/ConfigUpdater
+          version: ^2.0.0
+          branch: master
 ...
