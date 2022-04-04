@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace NgLamVN\InvCraft;
 
+use JackMD\UpdateNotifier\UpdateNotifier;
 use JinodkDevTeam\utils\ItemUtils;
 use muqsit\invmenu\InvMenuHandler;
 use NgLamVN\InvCraft\command\InvCraftCommand;
@@ -25,6 +26,7 @@ class Loader extends PluginBase{
 		$this->loadRecipes();
 
 		$this->getServer()->getCommandMap()->register("invcraft", new InvCraftCommand($this));
+		UpdateNotifier::checkUpdate($this->getDescription()->getName(), $this->getDescription()->getVersion());
 	}
 
 	public function loadRecipes(){

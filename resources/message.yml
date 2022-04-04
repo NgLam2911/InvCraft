@@ -1,5 +1,9 @@
 # InvCraft Message Config
 
+# DO NOT EDIT THIS VALUE.
+# ONLY FOR INTERNAL USE.
+config-version: 1
+
 menu.craft6x6: "BigCraftingTable"
 menu.craft3x3: "NormalCraftingTable"
 menu.add: "Add Recipe"

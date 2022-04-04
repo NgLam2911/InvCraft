@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace NgLamVN\InvCraft;
 
+use JackMD\ConfigUpdater\ConfigUpdater;
+use JsonException;
 use pocketmine\Server;
 use pocketmine\utils\Config;
 
@@ -14,6 +16,8 @@ class Provider{
 	public array $recipes;
 	/** @var Config */
 	public Config $msg;
+
+	private const CONFIG_VERSION = 1;
 
 	//YamlProvider "I am noob at MySQL or SQLite"
 
@@ -26,6 +30,10 @@ class Provider{
 		$this->recipes = $this->config->getAll();
 		$this->getLoader()->saveResource("message.yml");
 		$this->msg = new Config($this->getLoader()->getDataFolder() . "message.yml", Config::YAML);
+		//Check update
+		if (ConfigUpdater::checkUpdate($this->getLoader(), $this->msg, "config-version", self::CONFIG_VERSION)){
+			$this->msg = new Config($this->getLoader()->getDataFolder() . "message.yml", Config::YAML);
+		}
 	}
 
 	public function getLoader() : ?Loader{
@@ -37,7 +45,7 @@ class Provider{
 	}
 
 	/**
-	 * @throws \JsonException
+	 * @throws JsonException
 	 */
 	public function save(){
 		$this->config->setAll($this->recipes);
