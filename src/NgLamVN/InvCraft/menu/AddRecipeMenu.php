@@ -77,7 +77,7 @@ class AddRecipeMenu extends BaseMenu{
 		}
 		$recipe = Recipe::makeRecipe($this->recipe_name, $recipe_data, $result, $this->getMode());
 		foreach($this->getLoader()->getRecipes() as $other){
-			if($other->equal($recipe)){
+			if($other->isSame($recipe)){
 				if($other->getMode() == $recipe->getMode()){
 					$this->getPlayer()->sendMessage($this->getLoader()->getProvider()->getMessage("msg.sametyperecipe"));
 					break;

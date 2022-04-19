@@ -43,12 +43,27 @@ class Recipe{
 	 *
 	 * @return bool
 	 */
-	public function equal(Recipe|array $other) : bool{
+	public function isSame(Recipe|array $other) : bool{
 		if($other instanceof Recipe){
 			$other = $other->getRecipeData();
 		}
 		foreach(array_keys($this->getRecipeData()) as $key){
 			if(!$this->getRecipeData()[$key]->canStackWith($other[$key])){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public function isEnough(Recipe|array $other) : bool{
+		if($other instanceof Recipe){
+			$other = $other->getRecipeData();
+		}
+		foreach(array_keys($this->getRecipeData()) as $key){
+			if(!$this->getRecipeData()[$key]->canStackWith($other[$key])){
+				return false;
+			}
+			if($this->getRecipeData()[$key]->getCount() > $other[$key]->getCount()){
 				return false;
 			}
 		}
