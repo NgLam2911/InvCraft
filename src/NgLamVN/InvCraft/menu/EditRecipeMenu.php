@@ -98,7 +98,7 @@ class EditRecipeMenu extends BaseMenu{
 		$this->recipe->setResultItem($result);
 		foreach($this->getLoader()->getRecipes() as $other){
 			if($other->getRecipeName() == $this->recipe->getRecipeName()) continue;
-			if($other->isEnough($this->recipe)){
+			if($other->isSame($this->recipe)){
 				if($other->getMode() == $this->recipe->getMode()){
 					$this->getPlayer()->sendMessage($this->getLoader()->getProvider()->getMessage("msg.sametyperecipe"));
 					break;
