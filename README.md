@@ -10,3 +10,6 @@
 
 * `ic.command`: true
 * `ic.admin`: op
+
+# Note
+* This is the rewrite version of InvCraft. Its still WIP
