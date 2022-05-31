@@ -13,3 +13,7 @@
 
 # Note
 * This is the rewrite version of InvCraft. Its still WIP
+* This version will have different file save format soo... i will add a convert system soon ...
+
+# TODO
+* No...
