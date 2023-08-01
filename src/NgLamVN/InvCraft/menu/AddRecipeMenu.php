@@ -41,7 +41,6 @@ class AddRecipeMenu extends BaseMenu{
 			}
 		}
 		$idsave = $this->getLoader()->getProvider()->getMessage("menu.save.item");
-		$inv = $this->menu->getInventory();
 
 		$save = $this->getLoader()->getProvider()->stringToItem(strtolower($idsave))->setCustomName($this->getLoader()->getProvider()->getMessage("menu.save.name"));$result->isNull()
 		$inv->setItem(self::SAVE_SLOT, $save);
