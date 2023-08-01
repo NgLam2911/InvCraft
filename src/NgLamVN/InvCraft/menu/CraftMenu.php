@@ -107,7 +107,7 @@ class CraftMenu extends BaseMenu{
 		}
 		for($i = 0; $i <= 53; $i++){
 			if((!in_array($i, $this->getProtectedSlot())) and ($i !== $this->getResultSlot())){
-		        $air = $this->getLoader()->getProvider()->stringToItem(strtolower("Air")):
+		        $air = $this->getLoader()->getProvider()->stringToItem(strtolower("Air"));
 				$this->menu->getInventory()->setItem($i,$air);
 			}
 		}
