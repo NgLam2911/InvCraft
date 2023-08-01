@@ -7,7 +7,11 @@ namespace NgLamVN\InvCraft;
 use JackMD\ConfigUpdater\ConfigUpdater;
 use JsonException;
 use pocketmine\Server;
+use pocketmine\item\LegacyStringToItemParser;
+use pocketmine\item\LegacyStringToItemParserException;
+use pocketmine\item\StringToItemParser;
 use pocketmine\utils\Config;
+use pocketmine\item\Item;
 
 class Provider{
 	/** @var Config $config */
@@ -35,6 +39,15 @@ class Provider{
 			$this->msg = new Config($this->getLoader()->getDataFolder() . "message.yml", Config::YAML);
 		}
 	}
+	public function stringToItem(string $input): ?Item {
+        $string = strtolower(str_replace([' ', 'minecraft:'], ['_', ''], trim($input)));
+        try {
+            $item = StringToItemParser::getInstance()->parse($string) ?? LegacyStringToItemParser::getInstance()->parse($string);
+        } catch (LegacyStringToItemParserException $e) {
+            return null;
+        }
+        return $item;
+    }
 
 	public function getLoader() : ?Loader{
 		$loader = Server::getInstance()->getPluginManager()->getPlugin("InvCraft");
