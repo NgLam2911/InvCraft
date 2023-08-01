@@ -10,7 +10,7 @@ use muqsit\invmenu\transaction\InvMenuTransactionResult;
 use muqsit\invmenu\type\InvMenuTypeIds;
 use NgLamVN\InvCraft\Loader;
 use NgLamVN\InvCraft\Recipe;
-use pocketmine\item\ItemFactory;
+use NgLamVN\InvCraft\Provider;
 use pocketmine\player\Player;
 
 class ViewRecipe extends BaseMenu{
@@ -35,8 +35,8 @@ class ViewRecipe extends BaseMenu{
 		$this->menu->setListener(Closure::fromCallable([$this, "MenuListener"]));
 		$inv = $this->menu->getInventory();
 
-		$ids = explode(":", $this->getLoader()->getProvider()->getMessage("menu.item"));
-		$item = ItemFactory::getInstance()->get((int) $ids[0], (int) $ids[1]);
+		$ids = $this->getLoader()->getProvider()->getMessage("menu.item");
+		$item = $this->getLoader()->getProvider()->stringToItem(strtolower($ids));
 		for($i = 0; $i <= 53; $i++){
 			if(in_array($i, $this->getProtectedSlot())){
 				$inv->setItem($i, $item);
