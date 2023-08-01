@@ -10,8 +10,7 @@ use muqsit\invmenu\transaction\InvMenuTransactionResult;
 use muqsit\invmenu\type\InvMenuTypeIds;
 use NgLamVN\InvCraft\Loader;
 use NgLamVN\InvCraft\Recipe;
-use pocketmine\item\ItemFactory;
-use pocketmine\item\ItemIds;
+use pocketmine\item\ItemTypeIds;
 use pocketmine\player\Player;
 
 class AddRecipeMenu extends BaseMenu{
@@ -34,15 +33,16 @@ class AddRecipeMenu extends BaseMenu{
 		$this->menu->setListener(Closure::fromCallable([$this, "MenuListener"]));
 		$inv = $this->menu->getInventory();
 
-		$ids = explode(":", $this->getLoader()->getProvider()->getMessage("menu.item"));
-		$item = ItemFactory::getInstance()->get((int) $ids[0], (int) $ids[1]);
+		$ids = $this->getLoader()->getProvider()->getMessage("menu.item");
+		$item = $this->getLoader()->getProvider()->stringToItem(strtolower($ids));
 		for($i = 0; $i <= 52; $i++){
 			if(in_array($i, $this->getProtectedSlot())){
 				$inv->setItem($i, $item);
 			}
 		}
-		$idsave = explode(":", $this->getLoader()->getProvider()->getMessage("menu.save.item"));
-		$save = ItemFactory::getInstance()->get((int) $idsave[0], (int) $idsave[1])->setCustomName($this->getLoader()->getProvider()->getMessage("menu.save.name"));
+		$idsave = $this->getLoader()->getProvider()->getMessage("menu.save.item");
+
+		$save = $this->getLoader()->getProvider()->stringToItem(strtolower($idsave))->setCustomName($this->getLoader()->getProvider()->getMessage("menu.save.name"));$result->isNull()
 		$inv->setItem(self::SAVE_SLOT, $save);
 
 		$this->menu->send($player);
@@ -71,7 +71,7 @@ class AddRecipeMenu extends BaseMenu{
 		$recipe_data = $this->makeRecipeData();
 		$result = $this->menu->getInventory()->getItem($this->getResultSlot());
 
-		if($result->getId() == ItemIds::AIR){
+		if($result->isNull()){
 			$this->getPlayer()->sendMessage($this->getLoader()->getProvider()->getMessage("msg.missresult"));
 			return;
 		}
