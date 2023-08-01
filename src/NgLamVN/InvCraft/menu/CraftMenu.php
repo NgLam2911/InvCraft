@@ -12,8 +12,7 @@ use muqsit\invmenu\type\InvMenuTypeIds;
 use NgLamVN\InvCraft\Recipe;
 use pocketmine\inventory\Inventory;
 use pocketmine\item\Item;
-use pocketmine\item\ItemFactory;
-use pocketmine\item\ItemIds;
+use pocketmine\item\ItemTypeIds;
 use pocketmine\player\Player;
 
 class CraftMenu extends BaseMenu{
@@ -34,8 +33,8 @@ class CraftMenu extends BaseMenu{
 		$this->menu->setListener(Closure::fromCallable([$this, "MenuListener"]));
 		$this->menu->setInventoryCloseListener(Closure::fromCallable([$this, "MenuCloseListener"]));
 		$inv = $this->menu->getInventory();
-		$ids = explode(":", $this->getLoader()->getProvider()->getMessage("menu.item"));
-		$item = ItemFactory::getInstance()->get((int) $ids[0], (int) $ids[1]);
+		$ids = $this->getLoader()->getProvider()->getMessage("menu.item");
+		$item = $this->getLoader()->getProvider()->stringToItem(strtolower($ids));
 		for($i = 0; $i <= 53; $i++){
 			if(in_array($i, $this->getProtectedSlot())){
 				$inv->setItem($i, $item);
@@ -58,8 +57,8 @@ class CraftMenu extends BaseMenu{
 		}
 		if($transaction->getAction()->getSlot() === $this->getResultSlot()){
 			$result = $this->menu->getInventory()->getItem($this->getResultSlot());
-			if($result->getId() == ItemIds::AIR){
-				return $transaction->discard();
+			if($result->isNull()){
+			    return $transaction->discard();
 			}
 			$this->clearCraftItem();
 			return $transaction->continue()->then(function(){
@@ -86,7 +85,8 @@ class CraftMenu extends BaseMenu{
 				}
 			}
 		}
-		$this->setResult(ItemFactory::getInstance()->get(0));
+		$air = $this->getLoader()->getProvider()->stringToItem(strtolower("Air"));
+		$this->setResult($air);
 		$this->correct_recipe = null;
 		return $transaction->continue();
 	}
@@ -107,7 +107,8 @@ class CraftMenu extends BaseMenu{
 		}
 		for($i = 0; $i <= 53; $i++){
 			if((!in_array($i, $this->getProtectedSlot())) and ($i !== $this->getResultSlot())){
-				$this->menu->getInventory()->setItem($i, ItemFactory::getInstance()->get(ItemIds::AIR));
+		        $air = $this->getLoader()->getProvider()->stringToItem(strtolower("Air")):
+				$this->menu->getInventory()->setItem($i,$air);
 			}
 		}
 	}
@@ -145,8 +146,9 @@ class CraftMenu extends BaseMenu{
 			if(!in_array($i, $this->getProtectedSlot()))
 				if($i !== $this->getResultSlot()){
 					$item = $inventory->getItem($i);
-					if($item->getId() !== ItemIds::AIR)
-						$player->getInventory()->addItem($item);
+					if(!$item->isNull()){
+					    $player->getInventory()->addItem($item);
+					}
 				}
 		}
 	}
