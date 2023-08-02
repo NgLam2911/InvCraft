@@ -85,7 +85,7 @@ class CraftMenu extends BaseMenu{
 				}
 			}
 		}
-		$air = $this->getLoader()->getProvider()->stringToItem(strtolower("Air"));
+		$air = VanillaItems::AIR();
 		$this->setResult($air);
 		$this->correct_recipe = null;
 		return $transaction->continue();
