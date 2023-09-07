@@ -43,8 +43,8 @@ class AddRecipeMenu extends BaseMenu{
 		}
 		$idsave = $this->getLoader()->getProvider()->getMessage("menu.save.item");
 
-		$save = $this->getLoader()->getProvider()->stringToItem(strtolower($idsave))->setCustomName($this->getLoader()->getProvider()->getMessage("menu.save.name"));$result->isNull()
-		$this->menu->getInventory()->setItem(self::SAVE_SLOT, $save);
+		$save = $this->getLoader()->getProvider()->stringToItem(strtolower($idsave))->setCustomName($this->getLoader()->getProvider()->getMessage("menu.save.name"));$result->isNull();
+		$inv->setItem(self::SAVE_SLOT, $save);
 
 		$this->menu->send($player);
 	}
