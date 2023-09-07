@@ -24,7 +24,7 @@ class AddRecipeMenu extends BaseMenu{
 
 	public function __construct(Player $player, Loader $loader, int $mode, $recipe_name){
 		$this->recipe_name = $recipe_name;
-		$inv = $this->menu->getInventory();
+		
 		parent::__construct($player, $loader, $mode);
 	}
 
@@ -32,7 +32,7 @@ class AddRecipeMenu extends BaseMenu{
 		$this->menu = InvMenu::create(InvMenuTypeIds::TYPE_DOUBLE_CHEST);
 		$this->menu->setName($this->getLoader()->getProvider()->getMessage("menu.add"));
 		$this->menu->setListener(Closure::fromCallable([$this, "MenuListener"]));
-		
+		$inv = $this->menu->getInventory();
 
 		$ids = $this->getLoader()->getProvider()->getMessage("menu.item");
 		$item = $this->getLoader()->getProvider()->stringToItem(strtolower($ids));
