@@ -12,6 +12,7 @@ use muqsit\invmenu\type\InvMenuTypeIds;
 use NgLamVN\InvCraft\Recipe;
 use pocketmine\inventory\Inventory;
 use pocketmine\item\Item;
+use pocketmine\item\VanillaItems;
 use pocketmine\item\ItemTypeIds;
 use pocketmine\player\Player;
 
