@@ -3,6 +3,7 @@ build-by-default: true
 branches:
   - pm3
   - pm4
+  - pm5
 projects:
   InvCraft:
     path: ""
