@@ -12,8 +12,8 @@ projects:
       - src: Muqsit/InvMenu/Invmenu
         branch: "4.0"
         version: ^4.4.1
-      - src: JinodkDevTeam/FormAPI/libFormAPI
-        version: ^1.4.0-alpha
+      - src: jojoe77777/FormAPI/libFormAPI
+        version: ^2.1.1
       - src: JinodkDevTeam/FI-Utils/FI-Utils
         version: ^0.1.1
       - src: ifera-mc/UpdateNotifier/UpdateNotifier
