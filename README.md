@@ -10,3 +10,6 @@
 
 * `ic.command`: true
 * `ic.admin`: op
+
+# NOTE
+* NgLam has stopped maintaining PocketMine-MP-related projects since 8/2023 due to his 6-year-old laptop already reaching its limit and being too busy for school projects. No one, including him, knew when he would come back...  
