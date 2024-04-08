@@ -28,7 +28,3 @@ jobs:
         with:
           name: plugin.phar
           path: ${{steps.pharynx.outputs.output-phar}}
-
-      - run: mkdir _site && cp ${{steps.pharynx.outputs.output-phar}} _site/InvCraft.phar
-      - uses: actions/upload-pages-artifact@v2
-      - uses: actions/deploy-pages@v1
