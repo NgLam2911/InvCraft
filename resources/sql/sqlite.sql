@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS invcraft_recipes (
 );
 -- #    }
 -- #    { load
-SELECT * FROM invcraft_recipes;
+SELECT name, HEX(data) AS data FROM invcraft_recipes;
 -- #    }
 -- #    { add
 -- #        :name txt
