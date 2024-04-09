@@ -34,13 +34,17 @@ final class Database {
             "sqlite" => "sql/sqlite.sql",
             "mysql" => "sql/mysql.sql"
         ]);
-
         yield $this->database->asyncGeneric(Stmts::INIT);
     }
 
     public function asyncLoad() : Generator{
-        //TODO: Implement this after RecipeManager
-        yield 0;
+        $result = yield $this->database->asyncSelect(Stmts::LOAD);
+        foreach ($result as $row){
+            $data = $this->parser->decode($row["data"]);
+            $nbt = NbtHelper::decompressCompoundTag($data);
+            $recipe = Recipe::nbtDeserialize($nbt);
+            $this->plugin->getRecipeManager()->addRecipe($recipe, false);
+        }
     }
 
     public function asyncAdd(Recipe $recipe) : Generator{
@@ -66,6 +70,9 @@ final class Database {
     }
 
     public function close() : void{
-        $this->database->close();
+        if (isset($this->database)){
+            $this->database->waitAll();
+            $this->database->close();
+        }
     }
 }
