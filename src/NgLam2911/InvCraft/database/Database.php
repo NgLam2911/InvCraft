@@ -8,8 +8,8 @@ use NgLam2911\InvCraft\InvCraft;
 use NgLam2911\InvCraft\libs\_9fbc4bfefe0cd102\SOFe\AwaitGenerator\Await;
 use NgLam2911\InvCraft\recipe\Recipe;
 use NgLam2911\InvCraft\utils\NbtHelper;
-use NgLam2911\InvCraft\libs\_ddfba3c9bc07a3f1\poggit\libasynql\DataConnector;
-use NgLam2911\InvCraft\libs\_ddfba3c9bc07a3f1\poggit\libasynql\libasynql;
+use NgLam2911\InvCraft\libs\_50e936a452dc56a8\poggit\libasynql\DataConnector;
+use NgLam2911\InvCraft\libs\_50e936a452dc56a8\poggit\libasynql\libasynql;
 use NgLam2911\InvCraft\database\DatabaseStmts as Stmts;
 
 final class Database {
@@ -34,13 +34,17 @@ final class Database {
             "sqlite" => "sql/sqlite.sql",
             "mysql" => "sql/mysql.sql"
         ]);
-
         yield $this->database->asyncGeneric(Stmts::INIT);
     }
 
     public function asyncLoad() : Generator{
-        //TODO: Implement this after RecipeManager
-        yield 0;
+        $result = yield $this->database->asyncSelect(Stmts::LOAD);
+        foreach ($result as $row){
+            $data = $this->parser->decode($row["data"]);
+            $nbt = NbtHelper::decompressCompoundTag($data);
+            $recipe = Recipe::nbtDeserialize($nbt);
+            $this->plugin->getRecipeManager()->addRecipe($recipe, false);
+        }
     }
 
     public function asyncAdd(Recipe $recipe) : Generator{
@@ -66,6 +70,9 @@ final class Database {
     }
 
     public function close() : void{
-        $this->database->close();
+        if (isset($this->database)){
+            $this->database->waitAll();
+            $this->database->close();
+        }
     }
 }
