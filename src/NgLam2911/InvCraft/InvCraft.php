@@ -3,10 +3,9 @@ declare(strict_types=1);
 
 namespace NgLam2911\InvCraft;
 
-use NgLam2911\InvCraft\libs\_7b7089c0372b8863\muqsit\invmenu\InvMenuHandler;
+use NgLam2911\InvCraft\libs\_75a1441745f19d31\muqsit\invmenu\InvMenuHandler;
 use NgLam2911\InvCraft\database\Database;
 use NgLam2911\InvCraft\recipe\RecipeManager;
-use pocketmine\item\Item;
 use pocketmine\plugin\PluginBase;
 
 class InvCraft extends PluginBase{
