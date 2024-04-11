@@ -1,4 +1,4 @@
-# WORK IN PROGRESS
+# CURRENTLY WORK IN PROGRESS, BASE PLUGIN IS NOT COMPLETE YET
 
 # Build from s a u c e
 You can use pharynx to build this plugin, if pharynx is in your server path and you have cloned this repo into your plugins folder, you can use following cmd:
@@ -10,7 +10,15 @@ php -dphar.readonly=0 pharynx.phar -c -i plugins/InvCraft -p=plugins/InvCraft.ph
 # News in this version
 - [X] MySQL, SQLite async database support
 - [ ] Languages
-- [ ] Fast Craft
+
+# Planned for future update
+- [ ] Custom ingredients, result process
+    - [ ] Any meta match, EX: Any planks
+    - [ ] Transfer NBT from ingredients to result.w
+
+
+
+
 
 And more...
 

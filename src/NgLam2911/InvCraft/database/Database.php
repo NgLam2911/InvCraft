@@ -12,7 +12,7 @@ use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql;
 use NgLam2911\InvCraft\database\DatabaseStmts as Stmts;
 
-final class Database {
+final class     Database {
 
     private DataConnector $database;
     private BinaryStringParser $parser;
