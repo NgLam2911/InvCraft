@@ -6,7 +6,7 @@ namespace NgLam2911\InvCraft\database;
 use Generator;
 use NgLam2911\InvCraft\InvCraft;
 use SOFe\AwaitGenerator\Await;
-use NgLam2911\InvCraft\recipe\Recipe;
+use NgLam2911\InvCraft\crafting\Recipe;
 use NgLam2911\InvCraft\utils\NbtHelper;
 use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql;

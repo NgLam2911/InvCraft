@@ -5,7 +5,7 @@ namespace NgLam2911\InvCraft;
 
 use muqsit\invmenu\InvMenuHandler;
 use NgLam2911\InvCraft\database\Database;
-use NgLam2911\InvCraft\recipe\RecipeManager;
+use NgLam2911\InvCraft\crafting\RecipeManager;
 use pocketmine\plugin\PluginBase;
 
 class InvCraft extends PluginBase{
