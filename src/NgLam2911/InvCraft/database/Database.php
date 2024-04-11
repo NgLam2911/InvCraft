@@ -5,11 +5,11 @@ namespace NgLam2911\InvCraft\database;
 
 use Generator;
 use NgLam2911\InvCraft\InvCraft;
-use NgLam2911\InvCraft\libs\_b85e8bb11fb3a7ce\SOFe\AwaitGenerator\Await;
-use NgLam2911\InvCraft\recipe\Recipe;
+use NgLam2911\InvCraft\libs\_2f072b751c6b3f5e\SOFe\AwaitGenerator\Await;
+use NgLam2911\InvCraft\crafting\Recipe;
 use NgLam2911\InvCraft\utils\NbtHelper;
-use NgLam2911\InvCraft\libs\_b85e8bb11fb3a7ce\poggit\libasynql\DataConnector;
-use NgLam2911\InvCraft\libs\_b85e8bb11fb3a7ce\poggit\libasynql\libasynql;
+use NgLam2911\InvCraft\libs\_2f072b751c6b3f5e\poggit\libasynql\DataConnector;
+use NgLam2911\InvCraft\libs\_2f072b751c6b3f5e\poggit\libasynql\libasynql;
 use NgLam2911\InvCraft\database\DatabaseStmts as Stmts;
 
 final class     Database {
