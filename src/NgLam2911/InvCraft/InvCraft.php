@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace NgLam2911\InvCraft;
 
-use NgLam2911\InvCraft\libs\_318a7ebdfed54e34\muqsit\invmenu\InvMenuHandler;
+use NgLam2911\InvCraft\libs\_b85e8bb11fb3a7ce\muqsit\invmenu\InvMenuHandler;
 use NgLam2911\InvCraft\database\Database;
 use NgLam2911\InvCraft\recipe\RecipeManager;
 use pocketmine\plugin\PluginBase;
