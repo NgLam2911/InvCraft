@@ -5,7 +5,7 @@ namespace NgLam2911\InvCraft\recipe;
 
 use Generator;
 use NgLam2911\InvCraft\InvCraft;
-use NgLam2911\InvCraft\libs\_2f072b751c6b3f5e\SOFe\AwaitGenerator\Await;
+use NgLam2911\InvCraft\libs\_a3fa0c42ab0e8c9e\SOFe\AwaitGenerator\Await;
 
 class RecipeManager{
 
