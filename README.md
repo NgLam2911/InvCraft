@@ -14,7 +14,7 @@ php -dphar.readonly=0 pharynx.phar -c -i plugins/InvCraft -p=plugins/InvCraft.ph
 # Planned for future update
 - [ ] Custom ingredients, result process
     - [ ] Any meta match, EX: Any planks
-    - [ ] Transfer NBT from ingredients to result.w
+    - [ ] Transfer NBT from ingredients to result
 
 
 

@@ -1,12 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace NgLam2911\InvCraft\recipe;
+namespace NgLam2911\InvCraft\crafting;
 
 use Generator;
 use NgLam2911\InvCraft\InvCraft;
 use SOFe\AwaitGenerator\Await;
-
 class RecipeManager{
 
     /** @var Recipe[] */
