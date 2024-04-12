@@ -3,8 +3,22 @@ declare(strict_types=1);
 
 namespace NgLam2911\InvCraft\crafting\ingredient;
 
+use NgLam2911\InvCraft\utils\NbtSerializable;
 use pocketmine\item\Item;
+use pocketmine\nbt\tag\CompoundTag;
 
-class RecipeIngredient{
-    //TODO: Implement
+interface RecipeIngredient extends NbtSerializable {
+    /**
+     * @param Item $item
+     * @return bool
+     * @description Check if the item can be accepted by this ingredient
+     */
+    public function accept(Item $item) : bool;
+
+    /**
+     * @param Item $item
+     * @return Item
+     * @description Return the result item after taking needed items for crafting
+     */
+    public function consume(Item $item) : Item;
 }

@@ -4,20 +4,23 @@ declare(strict_types=1);
 namespace NgLam2911\InvCraft\crafting;
 
 use InvalidArgumentException;
+use NgLam2911\InvCraft\crafting\ingredient\RecipeIngredient;
+use NgLam2911\InvCraft\crafting\result\RecipeResult;
 use pocketmine\item\Item;
-use pocketmine\item\VanillaItems;
 use pocketmine\nbt\NBT;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\ListTag;
+use NgLam2911\InvCraft\utils\NbtSerializable;
 
-class Recipe{
+class Recipe implements NbtSerializable{
 
     public function __construct(
         protected string $name,
         protected int $width,
         protected int $height,
+        /** @var $ingredients RecipeIngredient[] */
         protected array $ingredients,
-        protected Item $result,
+        protected RecipeResult $result,
     ){}
 
     public function getName(): string{
@@ -32,21 +35,21 @@ class Recipe{
         return $this->height;
     }
 
-    public function getIngredient(int $x, int $y): Item{
+    public function getIngredient(int $x, int $y): ?RecipeIngredient{
         if ($x > $this->width || $x < 0 || $y > $this->height || $y < 0) {
             throw new InvalidArgumentException("Invalid coordinate");
         }
         if (!isset($this->ingredients[$y][$x])) {
-            return VanillaItems::AIR();
+            return null;
         }
         return $this->ingredients[$x][$y];
     }
 
-    public function setIngredient(int $x, int $y, Item $item): void{
+    public function setIngredient(int $x, int $y, RecipeIngredient $ingredient): void{
         if ($x > $this->width || $x < 0 || $y > $this->height || $y < 0) {
             throw new InvalidArgumentException("Invalid coordinate");
         }
-        $this->ingredients[$y][$x] = $item;
+        $this->ingredients[$y][$x] = $ingredient;
     }
 
     /**
@@ -56,12 +59,12 @@ class Recipe{
         return $this->ingredients;
     }
 
-    public function getResult(): Item{
+    public function getResult(): RecipeResult{
         return $this->result;
     }
 
-    public function setResult(Item $item): void{
-        $this->result = $item;
+    public function setResult(RecipeResult $result): void{
+        $this->result = $result;
     }
 
     public function match(CraftingGrid $grid): bool{
@@ -70,7 +73,7 @@ class Recipe{
         }
         for ($y = 0; $y < $this->height; ++$y) {
             for ($x = 0; $x < $this->width; ++$x) {
-                if (!$this->getIngredient($x, $y)->equals($grid->getItem($x, $y))) {
+                if (!$this->getIngredient($x, $y)->accept($grid->getItem($x, $y))) {
                     return false;
                 }
             }
@@ -95,19 +98,20 @@ class Recipe{
         return $ctag;
     }
 
-    public static function nbtDeserialize(CompoundTag $ctag): self{
-        $name = $ctag->getString("name");
-        $width = $ctag->getInt("width");
-        $height = $ctag->getInt("height");
-        $result = Item::nbtDeserialize($ctag->getCompoundTag("result"));
+    public static function nbtDeserialize(CompoundTag $tag): self{
+        $name = $tag->getString("name");
+        $width = $tag->getInt("width");
+        $height = $tag->getInt("height");
+        $result = RecipeResult::nbtDeserialize($tag->getCompoundTag("result"));
         $ingredients = [];
-        $itag = $ctag->getListTag("ingredients");
+        $itag = $tag->getListTag("ingredients");
         $data = $itag->getValue();
         $index = 0;
         for ($y = 0; $y < $height; ++$y) {
             for ($x = 0; $x < $width; ++$x) {
                 if ($data[$index] instanceof CompoundTag){
-                    $ingredients[$y][$x] = Item::nbtDeserialize($data[$index]);
+                    $ingredients[$y][$x] = RecipeIngredient::nbtDeserialize($data[$index]);
+                    //TODO: Fix this
                 }
                 $index++;
             }
