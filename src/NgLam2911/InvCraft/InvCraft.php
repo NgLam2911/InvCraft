@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace NgLam2911\InvCraft;
 
 use Generator;
-use NgLam2911\InvCraft\libs\_41c165f74ec5c28a\muqsit\invmenu\InvMenuHandler;
+use NgLam2911\InvCraft\libs\_522e88ace0fcd4c0\muqsit\invmenu\InvMenuHandler;
 use NgLam2911\InvCraft\database\Database;
 use NgLam2911\InvCraft\crafting\RecipeManager;
 use pocketmine\plugin\PluginBase;
-use NgLam2911\InvCraft\libs\_41c165f74ec5c28a\SOFe\AwaitGenerator\Await;
+use NgLam2911\InvCraft\libs\_522e88ace0fcd4c0\SOFe\AwaitGenerator\Await;
 
 class InvCraft extends PluginBase{
 
@@ -23,7 +23,7 @@ class InvCraft extends PluginBase{
         $this->recipeManager = new RecipeManager($this);
         // Load recipes from database
         Await::f2c(function() : Generator{
-            yield $this->database->asyncLoad();
+            yield from $this->database->asyncLoad();
             $this->recipeManager->setReady();
         });
     }

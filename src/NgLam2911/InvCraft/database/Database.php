@@ -5,12 +5,11 @@ namespace NgLam2911\InvCraft\database;
 
 use Generator;
 use NgLam2911\InvCraft\InvCraft;
-use RuntimeException;
-use NgLam2911\InvCraft\libs\_41c165f74ec5c28a\SOFe\AwaitGenerator\Await;
+use NgLam2911\InvCraft\libs\_522e88ace0fcd4c0\SOFe\AwaitGenerator\Await;
 use NgLam2911\InvCraft\crafting\Recipe;
 use NgLam2911\InvCraft\utils\NbtHelper;
-use NgLam2911\InvCraft\libs\_41c165f74ec5c28a\poggit\libasynql\DataConnector;
-use NgLam2911\InvCraft\libs\_41c165f74ec5c28a\poggit\libasynql\libasynql;
+use NgLam2911\InvCraft\libs\_522e88ace0fcd4c0\poggit\libasynql\DataConnector;
+use NgLam2911\InvCraft\libs\_522e88ace0fcd4c0\poggit\libasynql\libasynql;
 use NgLam2911\InvCraft\database\DatabaseStmts as Stmts;
 
 final class     Database {
@@ -22,7 +21,7 @@ final class     Database {
         protected InvCraft $plugin
     ){
         Await::f2c(function () : Generator{
-            yield $this->asyncInit();
+            yield from $this->asyncInit();
         });
         //TODO: Handle errors
     }
@@ -35,11 +34,11 @@ final class     Database {
             "sqlite" => "sql/sqlite.sql",
             "mysql" => "sql/mysql.sql"
         ]);
-        yield $this->database->asyncGeneric(Stmts::INIT);
+        yield from $this->database->asyncGeneric(Stmts::INIT);
     }
 
     public function asyncLoad() : Generator{
-        $result = yield $this->database->asyncSelect(Stmts::LOAD);
+        $result = yield from $this->database->asyncSelect(Stmts::LOAD);
         foreach ($result as $row){
             $data = $this->parser->decode($row["data"]);
             $nbt = NbtHelper::decompressCompoundTag($data);
@@ -51,7 +50,7 @@ final class     Database {
     public function asyncAdd(Recipe $recipe) : Generator{
         $nbt = $recipe->nbtSerialize();
         $data = NbtHelper::compressCompoundTag($nbt);
-        yield $this->database->asyncInsert(Stmts::ADD, [
+        yield from $this->database->asyncInsert(Stmts::ADD, [
             "name" => $recipe->getName(),
             "data" => $this->parser->encode($data)
         ]);
@@ -60,14 +59,14 @@ final class     Database {
     public function asyncUpdate(Recipe $recipe) : Generator{
         $nbt = $recipe->nbtSerialize();
         $data = NbtHelper::compressCompoundTag($nbt);
-        yield $this->database->asyncChange(Stmts::UPDATE, [
+        yield from $this->database->asyncChange(Stmts::UPDATE, [
             "name" => $recipe->getName(),
             "data" => $this->parser->encode($data)
         ]);
     }
 
     public function asyncDelete(string $name) : Generator{
-        yield $this->database->asyncChange(Stmts::DELETE, ["name" => $name]);
+        yield from $this->database->asyncChange(Stmts::DELETE, ["name" => $name]);
     }
 
     public function close() : void{
