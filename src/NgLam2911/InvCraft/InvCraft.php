@@ -23,7 +23,7 @@ class InvCraft extends PluginBase{
         $this->recipeManager = new RecipeManager($this);
         // Load recipes from database
         Await::f2c(function() : Generator{
-            yield $this->database->asyncLoad();
+            yield from $this->database->asyncLoad();
             $this->recipeManager->setReady();
         });
     }
