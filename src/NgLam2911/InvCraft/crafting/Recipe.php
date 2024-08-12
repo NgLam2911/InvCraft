@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace NgLam2911\InvCraft\crafting;
 
 use InvalidArgumentException;
+use NgLam2911\InvCraft\crafting\ingredient\NormalRecipeIngredient;
 use NgLam2911\InvCraft\crafting\ingredient\RecipeIngredient;
 use NgLam2911\InvCraft\crafting\result\RecipeResult;
 use pocketmine\item\Item;
@@ -110,8 +111,11 @@ class Recipe implements NbtSerializable{
         for ($y = 0; $y < $height; ++$y) {
             for ($x = 0; $x < $width; ++$x) {
                 if ($data[$index] instanceof CompoundTag){
-                    $ingredients[$y][$x] = RecipeIngredient::nbtDeserialize($data[$index]);
-                    //TODO: Fix this
+                    $ingredient_type = $data[$index]->getString("type");
+                    $ingredients[$y][$x] = match ($ingredient_type) {
+                        "normal" => NormalRecipeIngredient::nbtDeserialize($data[$index]),
+                        default => null
+                    };
                 }
                 $index++;
             }

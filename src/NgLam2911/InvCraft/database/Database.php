@@ -5,11 +5,12 @@ namespace NgLam2911\InvCraft\database;
 
 use Generator;
 use NgLam2911\InvCraft\InvCraft;
-use NgLam2911\InvCraft\libs\_1548889e54f85de0\SOFe\AwaitGenerator\Await;
+use RuntimeException;
+use NgLam2911\InvCraft\libs\_7f24bd44278ec6ee\SOFe\AwaitGenerator\Await;
 use NgLam2911\InvCraft\crafting\Recipe;
 use NgLam2911\InvCraft\utils\NbtHelper;
-use NgLam2911\InvCraft\libs\_1548889e54f85de0\poggit\libasynql\DataConnector;
-use NgLam2911\InvCraft\libs\_1548889e54f85de0\poggit\libasynql\libasynql;
+use NgLam2911\InvCraft\libs\_7f24bd44278ec6ee\poggit\libasynql\DataConnector;
+use NgLam2911\InvCraft\libs\_7f24bd44278ec6ee\poggit\libasynql\libasynql;
 use NgLam2911\InvCraft\database\DatabaseStmts as Stmts;
 
 final class     Database {
@@ -23,7 +24,7 @@ final class     Database {
         Await::f2c(function () : Generator{
             yield $this->asyncInit();
         });
-        // Have no idea to handle throwed error
+        //TODO: Handle errors
     }
 
     public function asyncInit() : Generator {
