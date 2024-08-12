@@ -5,6 +5,7 @@ namespace NgLam2911\InvCraft\database;
 
 use Generator;
 use NgLam2911\InvCraft\InvCraft;
+use RuntimeException;
 use SOFe\AwaitGenerator\Await;
 use NgLam2911\InvCraft\crafting\Recipe;
 use NgLam2911\InvCraft\utils\NbtHelper;
@@ -23,7 +24,7 @@ final class     Database {
         Await::f2c(function () : Generator{
             yield $this->asyncInit();
         });
-        // Have no idea to handle throwed error
+        //TODO: Handle errors
     }
 
     public function asyncInit() : Generator {

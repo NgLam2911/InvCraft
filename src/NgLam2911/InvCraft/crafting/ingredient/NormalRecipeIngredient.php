@@ -3,28 +3,32 @@ declare(strict_types=1);
 
 namespace NgLam2911\InvCraft\crafting\ingredient;
 
-use NgLam2911\InvCraft\utils\NbtSerializable;
 use pocketmine\item\Item;
 use pocketmine\nbt\tag\CompoundTag;
 
 class NormalRecipeIngredient implements RecipeIngredient{
-    public function nbtSerialize(): CompoundTag
-    {
-        // TODO: Implement nbtSerialize() method.
+
+    public function __construct(
+        protected Item $item
+    ){}
+
+    public function nbtSerialize(): CompoundTag {
+        $ctag = new CompoundTag();
+        $ctag->setTag("item", $this->item->nbtSerialize());
+        $ctag->setString("type", "normal");
+        return $ctag;
     }
 
-    public static function nbtDeserialize(CompoundTag $tag): self
-    {
-        // TODO: Implement nbtDeserialize() method.
+    public static function nbtDeserialize(CompoundTag $tag): self {
+        return new self(Item::nbtDeserialize($tag->getCompoundTag("item")));
     }
 
-    public function accept(Item $item): bool
-    {
-        // TODO: Implement accept() method.
+    public function accept(Item $item): bool {
+        return $item->canStackWith($this->item) && $item->getCount() >= $this->item->getCount();
     }
 
-    public function consume(Item $item): Item
-    {
-        // TODO: Implement consume() method.
+    public function consume(Item $item): Item {
+        $item->setCount($item->getCount() - $this->item->getCount());
+        return $item;
     }
 }
