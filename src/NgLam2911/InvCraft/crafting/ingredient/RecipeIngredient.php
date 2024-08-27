@@ -1,11 +1,10 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace NgLam2911\InvCraft\crafting\ingredient;
 
 use NgLam2911\InvCraft\utils\NbtSerializable;
 use pocketmine\item\Item;
-use pocketmine\nbt\tag\CompoundTag;
 
 interface RecipeIngredient extends NbtSerializable {
     /**
@@ -21,4 +20,10 @@ interface RecipeIngredient extends NbtSerializable {
      * @description Return the result item after taking needed items for crafting
      */
     public function consume(Item $item) : Item;
+
+    /**
+     * @return Item
+     * @description Get the item of this ingredient
+     */
+    public function getItem() : Item;
 }

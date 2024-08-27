@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace NgLam2911\InvCraft\utils;
 
@@ -7,7 +7,7 @@ use pocketmine\nbt\BigEndianNbtSerializer;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\TreeRoot;
 
-class NbtHelper{
+class NbtHelper {
     private static function writeCompoundTag(CompoundTag $tag) : string{
         $serialier = new BigEndianNbtSerializer();
         return $serialier->write(new TreeRoot($tag));
