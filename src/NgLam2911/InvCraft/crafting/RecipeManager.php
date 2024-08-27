@@ -1,12 +1,14 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace NgLam2911\InvCraft\crafting;
 
+use Closure;
 use Generator;
 use NgLam2911\InvCraft\InvCraft;
-use NgLam2911\InvCraft\libs\_522e88ace0fcd4c0\SOFe\AwaitGenerator\Await;
-class RecipeManager{
+use NgLam2911\InvCraft\libs\_0b53f4b0b162bcf0\SOFe\AwaitGenerator\Await;
+
+class RecipeManager {
 
     /** @var Recipe[] */
     private array $recipes = [];
@@ -18,58 +20,75 @@ class RecipeManager{
     protected bool $ready = false;
 
     public function __construct(
-        private readonly InvCraft $plugin
     ){}
 
-    public function addRecipe(Recipe $recipe, $sync_with_db = true): void{
+    public function addRecipe(Recipe $recipe, $sync_with_db = true, Closure $callback = null) : void{
         $this->recipes[$recipe->getName()] = $recipe;
-        if ($sync_with_db){
+        if($sync_with_db){
             $this->setReady(false);
-            Await::f2c(function() use ($recipe) : Generator{
-                yield $this->plugin->getDatabase()->asyncAdd($recipe);
+            Await::f2c(function() use ($recipe, $callback) : Generator{
+                yield InvCraft::getInstance()->getDatabase()->asyncAdd($recipe);
                 $this->setReady();
+                if ($callback !== null){
+                    $callback();
+                }
             });
         }
     }
 
-    public function removeRecipe(string $name, $sync_with_db = true): void{
-        if (!isset($this->recipes[$name])){
+    public function removeRecipe(string $name, $sync_with_db = true, Closure $callback = null) : void{
+        if(!isset($this->recipes[$name])){
             return;
         }
         unset($this->recipes[$name]);
-        if ($sync_with_db){
+        if($sync_with_db){
             $this->setReady(false);
-            Await::f2c(function() use ($name) : Generator{
-                yield $this->plugin->getDatabase()->asyncDelete($name);
+            Await::f2c(function() use ($name, $callback) : Generator{
+                yield InvCraft::getInstance()->getDatabase()->asyncDelete($name);
                 $this->setReady();
+                if ($callback !== null){
+                    $callback();
+                }
             });
         }
     }
 
-    public function updateRecipe(Recipe $recipe, $sync_with_db = true): void{
+    public function updateRecipe(Recipe $recipe, $sync_with_db = true, Closure $callback = null) : void{
         $this->recipes[$recipe->getName()] = $recipe;
         $this->setReady(false);
-        if ($sync_with_db){
-            Await::f2c(function() use ($recipe) : Generator{
-                yield $this->plugin->getDatabase()->asyncUpdate($recipe);
+        if($sync_with_db){
+            Await::f2c(function() use ($recipe, $callback) : Generator{
+                yield InvCraft::getInstance()->getDatabase()->asyncUpdate($recipe);
                 $this->setReady();
+                if ($callback !== null){
+                    $callback();
+                }
             });
         }
     }
 
-    public function getRecipe(string $name): ?Recipe{
+    public function matchCraftingGrid(CraftingGrid $grid) : ?Recipe{
+        foreach($this->recipes as $recipe){
+            if($recipe->matchCraftingGrid($grid)){
+                return $recipe;
+            }
+        }
+        return null;
+    }
+
+    public function getRecipe(string $name) : ?Recipe{
         return $this->recipes[$name] ?? null;
     }
 
-    public function getRecipes(): array{
+    public function getRecipes() : array{
         return $this->recipes;
     }
 
-    public function isReady(): bool{
+    public function isReady() : bool{
         return $this->ready;
     }
 
-    public function setReady(bool $ready = true): void{
+    public function setReady(bool $ready = true) : void{
         $this->ready = $ready;
     }
 }

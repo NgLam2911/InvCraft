@@ -1,11 +1,11 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace NgLam2911\InvCraft\database;
 
 use RuntimeException;
 
-class BinaryStringParser{
+class BinaryStringParser {
     public const TYPE_MYSQL = 0;
     public const TYPE_SQLITE = 1;
 
@@ -22,10 +22,10 @@ class BinaryStringParser{
     }
 
     public static function fromDatabase(string $type) : BinaryStringParser{
-        return match($type){
+        return match ($type) {
             "mysql" => new self(self::TYPE_MYSQL),
             "sqlite" => new self(self::TYPE_SQLITE),
-            default => throw new RuntimeException("Unsupported database: {$type}")
+            default => throw new RuntimeException("Unsupported database: $type")
         };
     }
 }

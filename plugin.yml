@@ -1,7 +1,7 @@
 name: InvCraft
 main: NgLam2911\InvCraft\InvCraft
 api: 5.3.0
-version: 1.0.0
+version: 1.0-dev2
 author: NgLam2911
 
 permissions:

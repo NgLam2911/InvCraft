@@ -1,0 +1,35 @@
+<?php
+declare(strict_types=1);
+
+namespace NgLam2911\InvCraft\command;
+
+use NgLam2911\InvCraft\InvCraft;
+use NgLam2911\InvCraft\ui\forms\MainForm;
+use pocketmine\command\Command;
+use pocketmine\command\CommandSender;
+use pocketmine\player\Player;
+use pocketmine\plugin\Plugin;
+use pocketmine\plugin\PluginOwned;
+
+class InvCraftCommand extends Command implements PluginOwned {
+
+    public function __construct(){
+        parent::__construct("invcraft");
+        $this->setPermission("ic.command");
+        $this->setDescription("InvCraft Menu");
+        $this->setUsage("/invcraft");
+        $this->setAliases(["ic"]);
+    }
+
+    public function execute(CommandSender $sender, string $commandLabel, array $args) : void{
+        if (!$sender instanceof Player){
+            $sender->sendMessage("This command can only be used in-game");
+            return;
+        }
+        (new MainForm($sender))->sendForm();
+    }
+
+    public function getOwningPlugin() : Plugin{
+        return InvCraft::getInstance();
+    }
+}
