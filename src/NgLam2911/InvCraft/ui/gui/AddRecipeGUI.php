@@ -39,7 +39,7 @@ class AddRecipeGUI extends CraftingGridGUI{
             $this->saveRecipe();
             return $transaction->discard();
         }
-        if ($this->isInCraftingGrid($slot)){
+        if (!$this->isInCraftingGrid($slot)){
             return $transaction->discard();
         }
         return $transaction->continue();
