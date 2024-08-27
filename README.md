@@ -1,4 +1,4 @@
-# CURRENTLY WORK IN PROGRESS, BASE PLUGIN IS NOT COMPLETE YET
+# CURRENTLY IN TESTING PHASE, PLEASE CREATE NEW ISSUES FOR ANY BUG YOU FOUND.
 
 # Build from s a u c e
 You can use pharynx to build this plugin, if pharynx is in your server path and you have cloned this repo into your plugins folder, you can use following cmd:
