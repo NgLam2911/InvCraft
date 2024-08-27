@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace NgLam2911\InvCraft\ui\gui;
 
-use NgLam2911\InvCraft\libs\_1e2f502e6164b69f\muqsit\invmenu\transaction\InvMenuTransaction;
-use NgLam2911\InvCraft\libs\_1e2f502e6164b69f\muqsit\invmenu\transaction\InvMenuTransactionResult;
+use NgLam2911\InvCraft\libs\_7e404d41fc9b7423\muqsit\invmenu\transaction\InvMenuTransaction;
+use NgLam2911\InvCraft\libs\_7e404d41fc9b7423\muqsit\invmenu\transaction\InvMenuTransactionResult;
 use NgLam2911\InvCraft\crafting\Recipe;
 use NgLam2911\InvCraft\crafting\result\RecipeResult;
 use NgLam2911\InvCraft\InvCraft;
@@ -39,7 +39,7 @@ class AddRecipeGUI extends CraftingGridGUI{
             $this->saveRecipe();
             return $transaction->discard();
         }
-        if ($this->isInCraftingGrid($slot)){
+        if (!$this->isInCraftingGrid($slot)){
             return $transaction->discard();
         }
         return $transaction->continue();
