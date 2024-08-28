@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace NgLam2911\InvCraft\ui\forms;
 
 use Closure;
-use NgLam2911\InvCraft\libs\_7e404d41fc9b7423\dktapps\pmforms\MenuForm;
-use NgLam2911\InvCraft\libs\_7e404d41fc9b7423\dktapps\pmforms\MenuOption;
+use NgLam2911\InvCraft\libs\_5753972eb36c8972\dktapps\pmforms\MenuForm;
+use NgLam2911\InvCraft\libs\_5753972eb36c8972\dktapps\pmforms\MenuOption;
 use NgLam2911\InvCraft\InvCraft;
 use pocketmine\player\Player;
 
