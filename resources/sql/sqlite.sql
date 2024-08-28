@@ -10,17 +10,17 @@ CREATE TABLE IF NOT EXISTS invcraft_recipes (
 SELECT name, HEX(data) AS data FROM invcraft_recipes;
 -- #    }
 -- #    { add
--- #        :name txt
+-- #        :name string
 -- #        :data string
-INSERT OR REPLACE INTO invcraft_recipes (name, data) VALUES (:name, :data);
+INSERT OR REPLACE INTO invcraft_recipes (name, data) VALUES (:name, X:data);
 -- #    }
 -- #    { update
--- #        :name txt
+-- #        :name string
 -- #        :data string
 UPDATE invcraft_recipes SET data = :data WHERE name = :name;
 -- #    }
 -- #    { delete
--- #        :name txt
+-- #        :name string
 DELETE FROM invcraft_recipes WHERE name = :name;
 -- #    }
 -- #}

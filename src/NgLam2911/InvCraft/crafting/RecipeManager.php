@@ -27,7 +27,7 @@ class RecipeManager {
         if($sync_with_db){
             $this->setReady(false);
             Await::f2c(function() use ($recipe, $callback) : Generator{
-                yield InvCraft::getInstance()->getDatabase()->asyncAdd($recipe);
+                yield from InvCraft::getInstance()->getDatabase()->asyncAdd($recipe);
                 $this->setReady();
                 if ($callback !== null){
                     $callback();
@@ -44,7 +44,7 @@ class RecipeManager {
         if($sync_with_db){
             $this->setReady(false);
             Await::f2c(function() use ($name, $callback) : Generator{
-                yield InvCraft::getInstance()->getDatabase()->asyncDelete($name);
+                yield from InvCraft::getInstance()->getDatabase()->asyncDelete($name);
                 $this->setReady();
                 if ($callback !== null){
                     $callback();
@@ -58,7 +58,7 @@ class RecipeManager {
         $this->setReady(false);
         if($sync_with_db){
             Await::f2c(function() use ($recipe, $callback) : Generator{
-                yield InvCraft::getInstance()->getDatabase()->asyncUpdate($recipe);
+                yield from InvCraft::getInstance()->getDatabase()->asyncUpdate($recipe);
                 $this->setReady();
                 if ($callback !== null){
                     $callback();

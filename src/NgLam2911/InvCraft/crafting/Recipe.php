@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace NgLam2911\InvCraft\crafting;
 
 use InvalidArgumentException;
+use NgLam2911\InvCraft\crafting\ingredient\EmptyRecipeIngredient;
 use NgLam2911\InvCraft\crafting\ingredient\NormalRecipeIngredient;
 use NgLam2911\InvCraft\crafting\ingredient\RecipeIngredient;
 use NgLam2911\InvCraft\crafting\result\RecipeResult;
@@ -126,6 +127,7 @@ class Recipe implements NbtSerializable {
                     $ingredient_type = $data[$index]->getString("type");
                     $ingredients[$y][$x] = match ($ingredient_type) {
                         "normal" => NormalRecipeIngredient::nbtDeserialize($data[$index]),
+                        "empty" => new EmptyRecipeIngredient(),
                         default => null
                     };
                 }
@@ -139,6 +141,11 @@ class Recipe implements NbtSerializable {
         $ingredients = [];
         for($y = 0; $y < $grid->getRecipeHeight(); ++$y){
             for($x = 0; $x < $grid->getRecipeWidth(); ++$x){
+                $item = $grid->getIngredient($x, $y);
+                if ($item->isNull()){
+                    $ingredients[$y][$x] = new EmptyRecipeIngredient();
+                    continue;
+                }
                 $ingredients[$y][$x] = new NormalRecipeIngredient($grid->getIngredient($x, $y));
             }
         }
