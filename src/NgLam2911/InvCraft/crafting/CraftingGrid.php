@@ -6,6 +6,7 @@ namespace NgLam2911\InvCraft\crafting;
 use InvalidArgumentException;
 use LogicException;
 use pocketmine\item\Item;
+use pocketmine\item\VanillaItems;
 use RuntimeException;
 
 /** @note a bit modified based on CraftingGrid class in PMMP */
@@ -45,7 +46,7 @@ class CraftingGrid {
 
     public function getIngredient(int $x, int $y) : Item{
         if ($this->startX !== null && $this->startY !== null){
-            return $this->getItem($this->startX + $x, $this->startY + $y);
+            return $this->getItem($this->startX + $x, $this->startY + $y) ?? VanillaItems::AIR();
         }
         throw new LogicException("No ingredients in grid");
     }

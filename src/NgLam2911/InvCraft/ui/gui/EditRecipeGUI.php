@@ -9,6 +9,7 @@ use NgLam2911\InvCraft\crafting\Recipe;
 use NgLam2911\InvCraft\crafting\result\RecipeResult;
 use NgLam2911\InvCraft\InvCraft;
 use pocketmine\item\VanillaItems;
+use pocketmine\player\Player;
 
 class EditRecipeGUI extends ViewRecipeGUI {
 
@@ -27,7 +28,9 @@ class EditRecipeGUI extends ViewRecipeGUI {
                 return $transaction->discard();
             }
             $this->saveRecipe();
-            return $transaction->discard();
+            return $transaction->discard()->then(function(Player $player){
+                $this->menu->onClose($player);
+            });
         }
         if (!$this->isInCraftingGrid($slot)){
             return $transaction->discard();
