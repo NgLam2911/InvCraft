@@ -13,7 +13,7 @@ class ListRecipeForm{
     public function __construct(protected Player $player, protected ?Closure $todo = null){}
 
     function sendForm() : void{
-        $recipes = InvCraft::getInstance()->getRecipeManager()->getRecipes();
+        $recipes = array_values(InvCraft::getInstance()->getRecipeManager()->getRecipes());
         $title = "List Recipes";
         $options = [];
         foreach($recipes as $recipe){
