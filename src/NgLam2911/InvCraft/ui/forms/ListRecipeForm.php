@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace NgLam2911\InvCraft\ui\forms;
 
 use Closure;
-use NgLam2911\InvCraft\libs\_5753972eb36c8972\dktapps\pmforms\MenuForm;
-use NgLam2911\InvCraft\libs\_5753972eb36c8972\dktapps\pmforms\MenuOption;
+use NgLam2911\InvCraft\libs\_7450c532b087bcf9\dktapps\pmforms\MenuForm;
+use NgLam2911\InvCraft\libs\_7450c532b087bcf9\dktapps\pmforms\MenuOption;
 use NgLam2911\InvCraft\InvCraft;
 use pocketmine\player\Player;
 
@@ -13,7 +13,7 @@ class ListRecipeForm{
     public function __construct(protected Player $player, protected ?Closure $todo = null){}
 
     function sendForm() : void{
-        $recipes = InvCraft::getInstance()->getRecipeManager()->getRecipes();
+        $recipes = array_values(InvCraft::getInstance()->getRecipeManager()->getRecipes());
         $title = "List Recipes";
         $options = [];
         foreach($recipes as $recipe){
