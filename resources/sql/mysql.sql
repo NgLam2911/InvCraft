@@ -10,18 +10,18 @@ CREATE TABLE IF NOT EXISTS invcraft_recipes (
 SELECT * FROM invcraft_recipes;
 -- #    }
 -- #    { add
--- #        :name txt
+-- #        :name string
 -- #        :data string
 INSERT INTO invcraft_recipes (name, data) VALUES (:name, :data)
 ON DUPLICATE KEY UPDATE data = VALUES(data);
 -- #    }
 -- #    { update
--- #        :name txt
+-- #        :name string
 -- #        :data string
 UPDATE invcraft_recipes SET data = :data WHERE name = :name;
 -- #    }
 -- #    { delete
--- #        :name txt
+-- #        :name string
 DELETE FROM invcraft_recipes WHERE name = :name;
 -- #    }
 -- #}
