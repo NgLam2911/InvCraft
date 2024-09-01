@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace NgLam2911\InvCraft\ui\gui;
 
-use NgLam2911\InvCraft\libs\_7450c532b087bcf9\muqsit\invmenu\transaction\InvMenuTransaction;
-use NgLam2911\InvCraft\libs\_7450c532b087bcf9\muqsit\invmenu\transaction\InvMenuTransactionResult;
+use NgLam2911\InvCraft\libs\_570e4e8b4962adf5\muqsit\invmenu\transaction\InvMenuTransaction;
+use NgLam2911\InvCraft\libs\_570e4e8b4962adf5\muqsit\invmenu\transaction\InvMenuTransactionResult;
 use NgLam2911\InvCraft\crafting\Recipe;
 use NgLam2911\InvCraft\crafting\result\RecipeResult;
 use NgLam2911\InvCraft\InvCraft;
 use pocketmine\item\VanillaItems;
+use pocketmine\player\Player;
 
 class EditRecipeGUI extends ViewRecipeGUI {
 
@@ -27,7 +28,9 @@ class EditRecipeGUI extends ViewRecipeGUI {
                 return $transaction->discard();
             }
             $this->saveRecipe();
-            return $transaction->discard();
+            return $transaction->discard()->then(function(Player $player){
+                $this->menu->onClose($player);
+            });
         }
         if (!$this->isInCraftingGrid($slot)){
             return $transaction->discard();

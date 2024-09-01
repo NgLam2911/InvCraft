@@ -44,7 +44,7 @@ class Recipe implements NbtSerializable {
         if(!isset($this->ingredients[$y][$x])){
             return null;
         }
-        return $this->ingredients[$x][$y];
+        return $this->ingredients[$y][$x];
     }
 
     public function setIngredient(int $x, int $y, RecipeIngredient $ingredient) : void{
