@@ -15,12 +15,16 @@ class NormalRecipeIngredient implements RecipeIngredient {
     public function nbtSerialize() : CompoundTag{
         $ctag = new CompoundTag();
         $ctag->setTag("item", $this->item->nbtSerialize());
-        $ctag->setString("type", "normal");
+        $ctag->setString("type", $this->getType());
         return $ctag;
     }
 
     public static function nbtDeserialize(CompoundTag $tag) : self{
         return new self(Item::nbtDeserialize($tag->getCompoundTag("item")));
+    }
+
+    public function getType() : string{
+        return "normal";
     }
 
     public function accept(Item $item) : bool{

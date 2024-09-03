@@ -26,7 +26,11 @@ class InvCraftCommand extends Command implements PluginOwned {
             $sender->sendMessage("This command can only be used in-game");
             return;
         }
-        (new MainForm($sender))->sendForm();
+        if (InvCraft::getInstance()->getRecipeManager()->isReady()){
+            (new MainForm($sender))->sendForm();
+        } else {
+            $sender->sendMessage("Recipes are being updated, please wait a moment...");
+        }
     }
 
     public function getOwningPlugin() : Plugin{

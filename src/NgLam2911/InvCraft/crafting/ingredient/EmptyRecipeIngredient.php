@@ -20,6 +20,10 @@ class EmptyRecipeIngredient implements RecipeIngredient{
         return new self();
     }
 
+    public function getType() : string{
+        return "empty";
+    }
+
     public function accept(Item $item) : bool{
         return $item->isNull();
     }
