@@ -8,9 +8,9 @@ use NgLam2911\InvCraft\crafting\Recipe;
 use NgLam2911\InvCraft\database\DatabaseStmts as Stmts;
 use NgLam2911\InvCraft\InvCraft;
 use NgLam2911\InvCraft\utils\NbtHelper;
-use NgLam2911\InvCraft\libs\_2d7daee07e06bfc7\poggit\libasynql\DataConnector;
-use NgLam2911\InvCraft\libs\_2d7daee07e06bfc7\poggit\libasynql\libasynql;
-use NgLam2911\InvCraft\libs\_2d7daee07e06bfc7\SOFe\AwaitGenerator\Await;
+use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\poggit\libasynql\DataConnector;
+use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\poggit\libasynql\libasynql;
+use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\SOFe\AwaitGenerator\Await;
 
 final class Database {
 

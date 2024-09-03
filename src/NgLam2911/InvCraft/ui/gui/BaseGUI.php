@@ -3,10 +3,10 @@ declare(strict_types = 1);
 
 namespace NgLam2911\InvCraft\ui\gui;
 
-use NgLam2911\InvCraft\libs\_2d7daee07e06bfc7\muqsit\invmenu\InvMenu;
-use NgLam2911\InvCraft\libs\_2d7daee07e06bfc7\muqsit\invmenu\transaction\InvMenuTransaction;
-use NgLam2911\InvCraft\libs\_2d7daee07e06bfc7\muqsit\invmenu\transaction\InvMenuTransactionResult;
-use NgLam2911\InvCraft\libs\_2d7daee07e06bfc7\muqsit\invmenu\type\InvMenuTypeIds;
+use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\muqsit\invmenu\InvMenu;
+use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\muqsit\invmenu\transaction\InvMenuTransaction;
+use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\muqsit\invmenu\transaction\InvMenuTransactionResult;
+use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\muqsit\invmenu\type\InvMenuTypeIds;
 use pocketmine\inventory\Inventory;
 use pocketmine\player\Player;
 
