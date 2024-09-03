@@ -45,6 +45,16 @@ class EditRecipeGUI extends ViewRecipeGUI {
     }
 
     protected function checkClone() : bool{
-        return !is_null(InvCraft::getInstance()->getRecipeManager()->matchCraftingGrid($this->grid));
+        $matched = InvCraft::getInstance()->getRecipeManager()->matchCraftingGrid($this->grid);
+        if ($matched === null){
+            return false;
+        }
+        if ($matched->getName() === $this->recipe->getName()){
+            if ($matched->getResult()->getItem()->equals($this->recipe->getResult()->getItem())){
+                return true;
+            }
+            return false;
+        }
+        return true;
     }
 }
