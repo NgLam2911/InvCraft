@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace NgLam2911\InvCraft\ui\gui;
 
-use NgLam2911\InvCraft\libs\_a3643b0ab26a7681\muqsit\invmenu\transaction\InvMenuTransaction;
-use NgLam2911\InvCraft\libs\_a3643b0ab26a7681\muqsit\invmenu\transaction\InvMenuTransactionResult;
+use NgLam2911\InvCraft\libs\_af702d4ff2a6d56d\muqsit\invmenu\transaction\InvMenuTransaction;
+use NgLam2911\InvCraft\libs\_af702d4ff2a6d56d\muqsit\invmenu\transaction\InvMenuTransactionResult;
 use NgLam2911\InvCraft\crafting\Recipe;
+use NgLam2911\InvCraft\event\InvCraftItemEvent;
 use NgLam2911\InvCraft\InvCraft;
 use pocketmine\item\Item;
 use pocketmine\item\VanillaItems;
@@ -31,6 +32,11 @@ class CraftingGUI extends CraftingGridGUI {
         if ($slot === self::RESULT_SLOT){
             $result = $inv->getItem(self::RESULT_SLOT);
             if ($result->isNull()){
+                return $transaction->discard();
+            }
+            $event = new InvCraftItemEvent($this->player, $this->matched_recipe, $this->grid);
+            $event->call();
+            if ($event->isCancelled()){
                 return $transaction->discard();
             }
             $this->takeIngredients();

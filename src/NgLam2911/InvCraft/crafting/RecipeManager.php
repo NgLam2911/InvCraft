@@ -6,7 +6,7 @@ namespace NgLam2911\InvCraft\crafting;
 use Closure;
 use Generator;
 use NgLam2911\InvCraft\InvCraft;
-use NgLam2911\InvCraft\libs\_a3643b0ab26a7681\SOFe\AwaitGenerator\Await;
+use NgLam2911\InvCraft\libs\_af702d4ff2a6d56d\SOFe\AwaitGenerator\Await;
 
 class RecipeManager {
 
