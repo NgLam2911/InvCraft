@@ -4,13 +4,14 @@ declare(strict_types = 1);
 namespace NgLam2911\InvCraft;
 
 use Generator;
-use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\muqsit\invmenu\InvMenuHandler;
+use NgLam2911\InvCraft\libs\_9b30eaebc45eebb1\muqsit\invmenu\InvMenuHandler;
 use NgLam2911\InvCraft\command\InvCraftCommand;
 use NgLam2911\InvCraft\crafting\RecipeManager;
 use NgLam2911\InvCraft\database\Database;
+use NgLam2911\InvCraft\lang\LanguagesManager;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
-use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\SOFe\AwaitGenerator\Await;
+use NgLam2911\InvCraft\libs\_9b30eaebc45eebb1\SOFe\AwaitGenerator\Await;
 
 class InvCraft extends PluginBase {
     use SingletonTrait;
@@ -28,6 +29,11 @@ class InvCraft extends PluginBase {
         }
         $this->database = new Database();
         $this->recipeManager = new RecipeManager();
+        $config_lang = $this->getConfig()->get("language");
+        if (!is_string($config_lang)){
+            $config_lang = "en-US";
+        }
+        LanguagesManager::init($this, $config_lang);
         // Load recipes from database
         Await::f2c(function() : Generator{
             yield from $this->database->asyncLoad();

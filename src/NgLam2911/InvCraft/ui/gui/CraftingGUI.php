@@ -3,10 +3,12 @@ declare(strict_types=1);
 
 namespace NgLam2911\InvCraft\ui\gui;
 
-use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\muqsit\invmenu\transaction\InvMenuTransaction;
-use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\muqsit\invmenu\transaction\InvMenuTransactionResult;
+use NgLam2911\InvCraft\libs\_9b30eaebc45eebb1\muqsit\invmenu\transaction\InvMenuTransaction;
+use NgLam2911\InvCraft\libs\_9b30eaebc45eebb1\muqsit\invmenu\transaction\InvMenuTransactionResult;
 use NgLam2911\InvCraft\crafting\Recipe;
 use NgLam2911\InvCraft\event\InvCraftItemEvent;
+use NgLam2911\InvCraft\lang\LanguagesManager as Lang;
+use NgLam2911\InvCraft\lang\TextKeys as Key;
 use NgLam2911\InvCraft\InvCraft;
 use pocketmine\item\Item;
 use pocketmine\item\VanillaItems;
@@ -18,7 +20,7 @@ class CraftingGUI extends CraftingGridGUI {
 
     protected function prepare() : void{
         parent::prepare();
-        $this->getMenu()->setName("CraftingTable");
+        $this->getMenu()->setName(Lang::getText(Key::GUI_CRAFT_TITLE));
     }
 
     protected function onTransaction(InvMenuTransaction $transaction) : InvMenuTransactionResult{

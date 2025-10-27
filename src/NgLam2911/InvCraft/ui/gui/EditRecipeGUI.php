@@ -3,10 +3,12 @@ declare(strict_types=1);
 
 namespace NgLam2911\InvCraft\ui\gui;
 
-use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\muqsit\invmenu\transaction\InvMenuTransaction;
-use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\muqsit\invmenu\transaction\InvMenuTransactionResult;
+use NgLam2911\InvCraft\libs\_9b30eaebc45eebb1\muqsit\invmenu\transaction\InvMenuTransaction;
+use NgLam2911\InvCraft\libs\_9b30eaebc45eebb1\muqsit\invmenu\transaction\InvMenuTransactionResult;
 use NgLam2911\InvCraft\crafting\Recipe;
 use NgLam2911\InvCraft\crafting\result\RecipeResult;
+use NgLam2911\InvCraft\lang\LanguagesManager as Lang;
+use NgLam2911\InvCraft\lang\TextKeys as Key;
 use NgLam2911\InvCraft\InvCraft;
 use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
@@ -15,7 +17,7 @@ class EditRecipeGUI extends ViewRecipeGUI {
 
     protected function prepare() : void{
         parent::prepare();
-        $this->getMenu()->setName("Edit Recipe");
+        $this->getMenu()->setName(Lang::getText(Key::GUI_EDIT_TITLE));
         $this->getMenu()->getInventory()->setItem(53, VanillaItems::SLIMEBALL()->setCustomName("Save"));
     }
 
@@ -24,7 +26,7 @@ class EditRecipeGUI extends ViewRecipeGUI {
         if ($slot === 53){
             $this->portToGrid();
             if ($this->checkClone()){
-                $this->player->sendMessage("This recipe already exists or you didn't change anything");
+                $this->player->sendMessage(Lang::getText(Key::GUI_EDIT_EXISTS));
                 return $transaction->discard();
             }
             $this->saveRecipe();
@@ -42,6 +44,7 @@ class EditRecipeGUI extends ViewRecipeGUI {
         $result = $this->getMenu()->getInventory()->getItem(self::RESULT_SLOT);
         $recipe = Recipe::fromCraftingGrid($this->recipe->getName(), $this->grid, new RecipeResult($result, $this->recipe->getResult()->getTransferInfos()));
         InvCraft::getInstance()->getRecipeManager()->updateRecipe($recipe);
+        $this->player->sendMessage(Lang::getText(Key::GUI_EDIT_DONE));
     }
 
     protected function checkClone() : bool{

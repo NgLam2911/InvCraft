@@ -1,0 +1,33 @@
+---
+command.ingame: This command can only be used in-game.
+command.wait: Recipes are being updated, please wait a moment...
+command.description: InvCraft Menu
+
+form.menu.title: InvCraft Menu
+form.menu.title.admin: InvCraft Menu (Admin)
+form.menu.craft: Crafting Table
+form.menu.list: List Recipes
+form.menu.add: Add Recipe
+form.menu.edit: Edit existing Recipe
+form.menu.remove: Remove Recipe
+
+form.list.title: List Recipes
+
+form.add.title: Add Recipe
+form.add.text: Enter Recipe Name
+
+form.remove.title: Remove Recipe
+form.remove.text: Are you sure you want to remove this recipe ?
+
+gui.add.title: Add Recipe
+gui.add.exists: This recipe already exists.
+gui.add.done: Recipe has been added.
+
+gui.craft.title: Crafting Table
+
+gui.edit.title: Edit Recipe
+gui.edit.exists: This recipe already exists or you didn't change anything.
+gui.edit.done: Recipe has been updated.
+
+gui.view.title: View Recipe
+...

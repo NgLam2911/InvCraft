@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace NgLam2911\InvCraft\ui\gui;
 
-use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\muqsit\invmenu\type\InvMenuTypeIds;
+use NgLam2911\InvCraft\libs\_9b30eaebc45eebb1\muqsit\invmenu\type\InvMenuTypeIds;
 use NgLam2911\InvCraft\crafting\CraftingGrid;
 use pocketmine\block\utils\DyeColor;
 use pocketmine\block\VanillaBlocks;

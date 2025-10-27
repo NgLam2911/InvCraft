@@ -4,9 +4,11 @@ declare(strict_types=1);
 namespace NgLam2911\InvCraft\ui\forms;
 
 use Closure;
-use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\dktapps\pmforms\MenuForm;
-use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\dktapps\pmforms\MenuOption;
+use NgLam2911\InvCraft\libs\_9b30eaebc45eebb1\dktapps\pmforms\MenuForm;
+use NgLam2911\InvCraft\libs\_9b30eaebc45eebb1\dktapps\pmforms\MenuOption;
 use NgLam2911\InvCraft\InvCraft;
+use NgLam2911\InvCraft\lang\LanguagesManager as Lang;
+use NgLam2911\InvCraft\lang\TextKeys as Key;
 use pocketmine\player\Player;
 
 class ListRecipeForm{
@@ -14,7 +16,7 @@ class ListRecipeForm{
 
     function sendForm() : void{
         $recipes = array_values(InvCraft::getInstance()->getRecipeManager()->getRecipes());
-        $title = "List Recipes";
+        $title = Lang::getText(Key::FORM_LIST_TITLE);
         $options = [];
         foreach($recipes as $recipe){
             $options[] = new MenuOption($recipe->getName());

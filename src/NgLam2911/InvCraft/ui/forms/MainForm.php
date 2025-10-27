@@ -3,14 +3,16 @@ declare(strict_types=1);
 
 namespace NgLam2911\InvCraft\ui\forms;
 
-use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\dktapps\pmforms\CustomForm;
-use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\dktapps\pmforms\CustomFormResponse;
-use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\dktapps\pmforms\element\Input;
-use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\dktapps\pmforms\MenuForm;
-use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\dktapps\pmforms\MenuOption;
-use NgLam2911\InvCraft\libs\_6c9046632b65a4c3\dktapps\pmforms\ModalForm;
+use NgLam2911\InvCraft\libs\_9b30eaebc45eebb1\dktapps\pmforms\CustomForm;
+use NgLam2911\InvCraft\libs\_9b30eaebc45eebb1\dktapps\pmforms\CustomFormResponse;
+use NgLam2911\InvCraft\libs\_9b30eaebc45eebb1\dktapps\pmforms\element\Input;
+use NgLam2911\InvCraft\libs\_9b30eaebc45eebb1\dktapps\pmforms\MenuForm;
+use NgLam2911\InvCraft\libs\_9b30eaebc45eebb1\dktapps\pmforms\MenuOption;
+use NgLam2911\InvCraft\libs\_9b30eaebc45eebb1\dktapps\pmforms\ModalForm;
 use NgLam2911\InvCraft\crafting\Recipe;
 use NgLam2911\InvCraft\InvCraft;
+use NgLam2911\InvCraft\lang\LanguagesManager as Lang;
+use NgLam2911\InvCraft\lang\TextKeys as Key;
 use NgLam2911\InvCraft\ui\gui\AddRecipeGUI;
 use NgLam2911\InvCraft\ui\gui\CraftingGUI;
 use NgLam2911\InvCraft\ui\gui\EditRecipeGUI;
@@ -23,16 +25,16 @@ class MainForm{
 
     function sendForm() : void{
         $options = [
-            new MenuOption("Crafting Table"),
-            new MenuOption("List Recipes")
+            new MenuOption(Lang::getText(Key::FORM_MENU_CRAFT)),
+            new MenuOption(Lang::getText(Key::FORM_MENU_LIST))
         ];
         $admin_options = [
-            new MenuOption("Add Recipe"),
-            new MenuOption("Edit existing Recipe"),
-            new MenuOption("Remove Recipe")
+            new MenuOption(Lang::getText(Key::FORM_MENU_ADD)),
+            new MenuOption(Lang::getText(Key::FORM_MENU_EDIT)),
+            new MenuOption(Lang::getText(Key::FORM_MENU_REMOVE))
         ];
-        $title = "InvCraft Menu";
-        $admin_title = "InvCraft Menu (Admin)";
+        $title = Lang::getText(Key::FORM_MENU_TITLE);
+        $admin_title = Lang::getText(Key::FORM_MENU_TITLE_ADMIN);
         if ($this->player->hasPermission("ic.admin")){
             $options = array_merge($options, $admin_options);
             $title = $admin_title;
@@ -71,9 +73,9 @@ class MainForm{
 
     private function nameForm(Player $player) : void{
         $form = new CustomForm(
-            "Add Recipe",
+            Lang::getText(Key::FORM_ADD_TITLE),
             [
-                new Input("recipe_name", "Enter Recipe Name", "abc123")
+                new Input("recipe_name", Lang::getText(Key::FORM_ADD_TEXT), "abc123")
             ],
             function (Player $player, CustomFormResponse $response) : void{
                 $recipe_name = $response->getString("recipe_name");
@@ -85,8 +87,8 @@ class MainForm{
 
     private function confirmForm(Player $player, Recipe $recipe) : void{
         $form = new ModalForm(
-            "Remove Recipe",
-            "Are you sure you want to remove this recipe ?",
+            Lang::getText(Key::FORM_REMOVE_TITLE),
+            Lang::getText(Key::FORM_REMOVE_TEXT),
             function (Player $player, bool $choice) use ($recipe) : void{
                 if ($choice){
                     InvCraft::getInstance()->getRecipeManager()->removeRecipe($recipe->getName());
