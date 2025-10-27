@@ -14,13 +14,14 @@ Feel free to report any bugs or suggest new features in [Issues](https://github.
 - [X] MySQL, SQLite database support.
 - [X] Multi-pattern matching like vanilla crafting table.
 - [X] Work with any items, including custom items (if you have a plugin that can create custom items).
+- [X] Languages support
 
 # Planned for future update
-- [ ] Languages support
 - [ ] Custom ingredients, result process
   - [ ] Any meta match, EX: Any planks
   - [ ] Transfer NBT from ingredients to result
 - [ ] Custom, advanced API for developers
+- [X] I'm too lazy.
 
 And more...
 

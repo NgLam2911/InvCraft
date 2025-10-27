@@ -7,6 +7,8 @@ use muqsit\invmenu\transaction\InvMenuTransaction;
 use muqsit\invmenu\transaction\InvMenuTransactionResult;
 use NgLam2911\InvCraft\crafting\Recipe;
 use NgLam2911\InvCraft\event\InvCraftItemEvent;
+use NgLam2911\InvCraft\lang\LanguagesManager as Lang;
+use NgLam2911\InvCraft\lang\TextKeys as Key;
 use NgLam2911\InvCraft\InvCraft;
 use pocketmine\item\Item;
 use pocketmine\item\VanillaItems;
@@ -18,7 +20,7 @@ class CraftingGUI extends CraftingGridGUI {
 
     protected function prepare() : void{
         parent::prepare();
-        $this->getMenu()->setName("CraftingTable");
+        $this->getMenu()->setName(Lang::getText(Key::GUI_CRAFT_TITLE));
     }
 
     protected function onTransaction(InvMenuTransaction $transaction) : InvMenuTransactionResult{

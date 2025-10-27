@@ -8,6 +8,8 @@ use muqsit\invmenu\transaction\InvMenuTransactionResult;
 use NgLam2911\InvCraft\crafting\Recipe;
 use NgLam2911\InvCraft\crafting\result\RecipeResult;
 use NgLam2911\InvCraft\InvCraft;
+use NgLam2911\InvCraft\lang\LanguagesManager as Lang;
+use NgLam2911\InvCraft\lang\TextKeys as Key;
 use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
 
@@ -23,7 +25,7 @@ class AddRecipeGUI extends CraftingGridGUI{
 
     protected function prepare() : void{
         parent::prepare();
-        $this->getMenu()->setName("Add Recipe");
+        $this->getMenu()->setName(Lang::getText(Key::GUI_ADD_TITLE));
         $this->getMenu()->getInventory()->setItem(53, VanillaItems::SLIMEBALL()->setCustomName("Save"));
     }
 
@@ -33,7 +35,7 @@ class AddRecipeGUI extends CraftingGridGUI{
         if ($slot === 53){
             $this->portToGrid();
             if ($this->checkClone()){
-                $this->player->sendMessage("This recipe already exists");
+                $this->player->sendMessage(Lang::getText(Key::GUI_ADD_EXISTS));
                 return $transaction->discard();
             }
             $this->saveRecipe();
@@ -51,6 +53,7 @@ class AddRecipeGUI extends CraftingGridGUI{
         $result = $this->getMenu()->getInventory()->getItem(self::RESULT_SLOT);
         $recipe = Recipe::fromCraftingGrid($this->recipe_name, $this->grid, new RecipeResult($result));
         InvCraft::getInstance()->getRecipeManager()->addRecipe($recipe);
+        $this->player->sendMessage(Lang::getText(Key::GUI_ADD_DONE));
     }
 
     protected function checkClone() : bool{

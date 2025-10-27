@@ -6,6 +6,8 @@ namespace NgLam2911\InvCraft\ui\gui;
 use muqsit\invmenu\transaction\InvMenuTransaction;
 use muqsit\invmenu\transaction\InvMenuTransactionResult;
 use NgLam2911\InvCraft\crafting\Recipe;
+use NgLam2911\InvCraft\lang\LanguagesManager as Lang;
+use NgLam2911\InvCraft\lang\TextKeys as Key;
 use pocketmine\player\Player;
 
 class ViewRecipeGUI extends CraftingGridGUI {
@@ -20,7 +22,7 @@ class ViewRecipeGUI extends CraftingGridGUI {
 
     protected function prepare() : void{
         parent::prepare();
-        $this->getMenu()->setName("View Recipe");
+        $this->getMenu()->setName(Lang::getText(Key::GUI_VIEW_TITLE));
         $this->getMenu()->getInventory()->setItem(self::RESULT_SLOT, $this->recipe->getResult()->getItem());
         for($y = 0; $y < $this->recipe->getHeight(); $y++){
             for($x = 0; $x < $this->recipe->getWidth(); $x++){

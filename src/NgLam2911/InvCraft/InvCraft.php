@@ -8,6 +8,7 @@ use muqsit\invmenu\InvMenuHandler;
 use NgLam2911\InvCraft\command\InvCraftCommand;
 use NgLam2911\InvCraft\crafting\RecipeManager;
 use NgLam2911\InvCraft\database\Database;
+use NgLam2911\InvCraft\lang\LanguagesManager;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
 use SOFe\AwaitGenerator\Await;
@@ -28,6 +29,11 @@ class InvCraft extends PluginBase {
         }
         $this->database = new Database();
         $this->recipeManager = new RecipeManager();
+        $config_lang = $this->getConfig()->get("language");
+        if (!is_string($config_lang)){
+            $config_lang = "en-US";
+        }
+        LanguagesManager::init($this, $config_lang);
         // Load recipes from database
         Await::f2c(function() : Generator{
             yield from $this->database->asyncLoad();

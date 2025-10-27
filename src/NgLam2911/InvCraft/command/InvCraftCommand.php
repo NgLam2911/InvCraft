@@ -10,26 +10,28 @@ use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginOwned;
+use NgLam2911\InvCraft\lang\LanguagesManager as Lang;
+use NgLam2911\InvCraft\lang\TextKeys as Key;
 
 class InvCraftCommand extends Command implements PluginOwned {
 
     public function __construct(){
         parent::__construct("invcraft");
         $this->setPermission("ic.command");
-        $this->setDescription("InvCraft Menu");
+        $this->setDescription(Lang::getText(Key::COMMAND_DESCRIPTION));
         $this->setUsage("/invcraft");
         $this->setAliases(["ic"]);
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) : void{
         if (!$sender instanceof Player){
-            $sender->sendMessage("This command can only be used in-game");
+            $sender->sendMessage(Lang::getText(Key::COMMAND_INGAME));
             return;
         }
         if (InvCraft::getInstance()->getRecipeManager()->isReady()){
             (new MainForm($sender))->sendForm();
         } else {
-            $sender->sendMessage("Recipes are being updated, please wait a moment...");
+            $sender->sendMessage(Lang::getText(Key::COMMAND_WAIT));
         }
     }
 
