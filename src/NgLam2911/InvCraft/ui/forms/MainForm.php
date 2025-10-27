@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace NgLam2911\InvCraft\ui\forms;
 
-use dktapps\pmforms\CustomForm;
-use dktapps\pmforms\CustomFormResponse;
-use dktapps\pmforms\element\Input;
-use dktapps\pmforms\MenuForm;
-use dktapps\pmforms\MenuOption;
-use dktapps\pmforms\ModalForm;
+use NgLam2911\InvCraft\libs\_dbeaa3993dab2002\dktapps\pmforms\CustomForm;
+use NgLam2911\InvCraft\libs\_dbeaa3993dab2002\dktapps\pmforms\CustomFormResponse;
+use NgLam2911\InvCraft\libs\_dbeaa3993dab2002\dktapps\pmforms\element\Input;
+use NgLam2911\InvCraft\libs\_dbeaa3993dab2002\dktapps\pmforms\MenuForm;
+use NgLam2911\InvCraft\libs\_dbeaa3993dab2002\dktapps\pmforms\MenuOption;
+use NgLam2911\InvCraft\libs\_dbeaa3993dab2002\dktapps\pmforms\ModalForm;
 use NgLam2911\InvCraft\crafting\Recipe;
 use NgLam2911\InvCraft\InvCraft;
 use NgLam2911\InvCraft\lang\LanguagesManager as Lang;

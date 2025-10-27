@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace NgLam2911\InvCraft\ui\forms;
 
 use Closure;
-use dktapps\pmforms\MenuForm;
-use dktapps\pmforms\MenuOption;
+use NgLam2911\InvCraft\libs\_dbeaa3993dab2002\dktapps\pmforms\MenuForm;
+use NgLam2911\InvCraft\libs\_dbeaa3993dab2002\dktapps\pmforms\MenuOption;
 use NgLam2911\InvCraft\InvCraft;
 use NgLam2911\InvCraft\lang\LanguagesManager as Lang;
 use NgLam2911\InvCraft\lang\TextKeys as Key;

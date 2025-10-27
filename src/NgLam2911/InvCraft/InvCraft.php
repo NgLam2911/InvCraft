@@ -4,14 +4,14 @@ declare(strict_types = 1);
 namespace NgLam2911\InvCraft;
 
 use Generator;
-use muqsit\invmenu\InvMenuHandler;
+use NgLam2911\InvCraft\libs\_dbeaa3993dab2002\muqsit\invmenu\InvMenuHandler;
 use NgLam2911\InvCraft\command\InvCraftCommand;
 use NgLam2911\InvCraft\crafting\RecipeManager;
 use NgLam2911\InvCraft\database\Database;
 use NgLam2911\InvCraft\lang\LanguagesManager;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
-use SOFe\AwaitGenerator\Await;
+use NgLam2911\InvCraft\libs\_dbeaa3993dab2002\SOFe\AwaitGenerator\Await;
 
 class InvCraft extends PluginBase {
     use SingletonTrait;

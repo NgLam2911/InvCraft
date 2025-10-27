@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace NgLam2911\InvCraft\ui\gui;
 
-use muqsit\invmenu\transaction\InvMenuTransaction;
-use muqsit\invmenu\transaction\InvMenuTransactionResult;
+use NgLam2911\InvCraft\libs\_dbeaa3993dab2002\muqsit\invmenu\transaction\InvMenuTransaction;
+use NgLam2911\InvCraft\libs\_dbeaa3993dab2002\muqsit\invmenu\transaction\InvMenuTransactionResult;
 use NgLam2911\InvCraft\crafting\Recipe;
 use NgLam2911\InvCraft\lang\LanguagesManager as Lang;
 use NgLam2911\InvCraft\lang\TextKeys as Key;
