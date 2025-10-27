@@ -24,7 +24,7 @@ jobs:
           pm-version-major: "5"
       - uses: SOF3/pharynx@v0.2
         id: pharynx
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: plugin.phar
           path: ${{steps.pharynx.outputs.output-phar}}
